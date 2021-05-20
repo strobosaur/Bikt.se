@@ -21,6 +21,8 @@
     </div>
 </div>
 
+<script>updatePostsAjax()</script>
+
 <?php
 require_once 'footer.php';
 ?>

@@ -1,6 +1,6 @@
 // FUNCTION UPDATE POSTS
 function updatePostsAjax(){
-    $.get("post_update_ajax.php", function(data){
+    $.post("post_update_ajax.php", function(data){
         $("#post-column").empty();
         $("#post-column").append(data);
     });
@@ -10,7 +10,7 @@ setInterval(updatePostsAjax, 1000);
 
 // FUNCTION GET LOGIN FORM
 function getLoginAjax(){
-    $.get("login_ajax.php", function(data){
+    $.post("login_ajax.php", function(data){
         $("#flex-container1").empty();
         $("#flex-container1").append(data);
     });
@@ -18,7 +18,7 @@ function getLoginAjax(){
 
 // FUNCTION GET REGISTER FORM
 function getRegisterAjax(){
-    $.get("register_ajax.php", function(data){
+    $.post("register_ajax.php", function(data){
         $("#flex-container1").empty();
         $("#flex-container1").append(data);
     });
@@ -26,7 +26,7 @@ function getRegisterAjax(){
 
 // FUNCTION GET POST FORM
 function getPostformAjax(){
-    $.get("post_create_ajax.php", function(data){
+    $.post("post_create_ajax.php", function(data){
         $("#flex-container1").empty();
         $("#flex-container1").append(data);
     });
@@ -34,7 +34,7 @@ function getPostformAjax(){
 
 // FUNCTION GET MENU
 function getMenuAjax(){
-    $.get("nav_menu_ajax.php", function(data){
+    $.post("nav_menu_ajax.php", function(data){
         $("#nav-menu").empty();
         $("#nav-menu").append(data);
     });
@@ -141,7 +141,7 @@ $(document).ready(function(){
     // NAVIGATION MENU LOGOUT
     $('#menu_logout').click(function(e) {
         e.preventDefault();
-        $.get("logout_process.php", function(){
+        $.post("logout_process.php", function(){
             getLoginAjax();
             getMenuAjax();
         })
