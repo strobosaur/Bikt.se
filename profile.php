@@ -13,6 +13,15 @@
 }
 </style>
 
+
+<?php
+    // ENSURE USER IS LOGGED IN
+    if(!isset($_SESSION['userID'])){
+        header("location: index.php");
+        exit();
+    }
+?>
+
 <div class="flex-container2">
     <div class="container">
 
