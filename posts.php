@@ -36,12 +36,10 @@ echo '<div class="container">';
         echo '<small>' . $dateTime . '</small>';
 
         // DELETE BUTTON
-        echo '<form class="form-link-btn" action="post_delete.php" method="POST">';
+        echo '<form class="form-link-btn" id="form-delete-btn" action="post_delete.php" method="POST">';
             echo '<input type="hidden" value="' . $postID . '" name="postID">';
             echo '<button class="link-btn" type="submit" name="post-delete" id="post-delete">Radera</button>';
         echo '</form>';
-        /*echo '<a href="post_delete.php?id=' . $postID . '" name="' . $postID . '" id="' . $postID . '">Radera</a>';
-        echo '<a href="post_delete.php?id=' . $postID . '" name="' . $postID . '" id="' . $postID . '">Radera</a>';*/
     echo '</div>';
 echo '</div>';
 /*usleep(250000);*/

@@ -1,10 +1,6 @@
 <?php
 session_start();
 
-/*var_dump($_POST);
-var_dump($_FILES);
-exit();*/
-
 // VALIDATE INPUT AND STORE IN DATABASE
 if ((!isset($_POST['submit'])) || (!isset($_SESSION['userID']))) {
     header("Location: index.php");
