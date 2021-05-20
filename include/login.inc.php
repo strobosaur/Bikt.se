@@ -226,14 +226,16 @@ function loginUser($userID, $password){
     $userData = userExists($userID);
 
     if ($userData === false) {
-        header("location: ./index.php?error=nouser");
-        exit();
+        /*header("location: ./index.php?error=nouser");
+        exit();*/
+        return false;
     }
 
     // CHECK PASSWORD MATCH
     if (passwordMatchesDB($userID, $password) === false) {
-        header("location: ./index.php?error=wrongpwd");
-        exit();
+        /*header("location: ./index.php?error=wrongpwd");
+        exit();*/
+        return false;
     } else {
         session_start();
 
@@ -245,8 +247,9 @@ function loginUser($userID, $password){
         $_SESSION["userProfileImg"] = $userData['profileImg'];
         $_SESSION["loggedIn"] = true;
 
-        header("location: ./index.php?error=loggedin");
-        exit();
+        /*header("location: ./index.php?error=loggedin");
+        exit();*/
+        return true;
     }    
 }
 

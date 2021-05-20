@@ -11,7 +11,7 @@ setInterval(getPostsAjax, 1000);
 $(document).ready(function(){
 
     // SEND POST TO DATABASE
-    $('#form').submit(function(e) {
+    $('#form-post').submit(function(e) {
         e.preventDefault();
 
         var username = $('#name').val();
@@ -53,7 +53,6 @@ $(document).ready(function(){
             'postID': id,
         },
         success: function(data){
-            // remove the deleted comment
             getPostsAjax();
             console.log(data);
         }
@@ -96,7 +95,47 @@ $(document).ready(function(){
         }
         });		
     });*/
-});
+
+    // LOGIN HANDLING
+    $('#form-login').submit(function(e){
+        e.preventDefault();
+
+        var uname = $("#login_email").val();
+        var pwd = $("#login_password").val();
+
+        $.ajax({
+            url: 'login_process.php',
+            type: 'POST',
+            data: {
+            'login': 1,
+            'login_email': uname,
+            'login_password': pwd,
+        },
+        success: function(response){
+            if (response == true) {
+                $.get("post_create_ajax.php", function(data){
+                    $("#flex-container1").empty();
+                    $("#flex-container1").append(data);
+                    $("#form-post").append("<p><br>Inloggningen lyckades</p>");
+                })
+                $.get("nav_menu_ajax.php", function(data){
+                    $("#nav-menu").empty();
+                    $("#nav-menu").append(data);
+                })
+            } else {
+                $.get("login_ajax.php", function(data){
+                    $("#flex-container1").empty();
+                    $("#flex-container1").append(data);
+                    $("#form-post").append("<p><br>Inloggningen misslyckades</p>");
+                })
+                $.get("nav_menu_ajax.php", function(data){
+                    $("#nav-menu").empty();
+                    $("#nav-menu").append(data);
+                })
+            }
+        }
+        })
+    })
 
     $('#menu_register').click(function(e) {
         e.preventDefault();
@@ -121,3 +160,4 @@ $(document).ready(function(){
             $("#flex-container1").append(data);
         })
     })*/
+});
