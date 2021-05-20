@@ -21,7 +21,10 @@
     </div>
 </div>
 
-<script>updatePostsAjax()</script>
+<script>
+updatePostsAjax();
+setInterval(updatePostsAjax, 1000);
+</script>
 
 <?php
 require_once 'footer.php';
