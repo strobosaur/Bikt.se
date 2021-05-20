@@ -8,7 +8,7 @@
             <?php
             //echo "<p>Något gick fel</p>";
         } else if ($_GET['error'] == "none") {
-            echo "<p>Registreringen lyckades</p>";
+            echo "<p><br>Registreringen lyckades</p>";
         } else if ($_GET['error'] == "nouser") {
             ?>
             <script>setErrorFor(document.getElementById('login_email', "Kontot finns inte"));</script>
@@ -21,7 +21,7 @@
             <?php
             //echo "<p>Fel lösenord</p>";
         } else if ($_GET['error'] == "loggedin") {
-            echo "<p>Inloggningen lyckades</p>";
+            echo "<p><br>Inloggningen lyckades</p>";
         }
     }
 ?>
