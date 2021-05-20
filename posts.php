@@ -24,7 +24,7 @@ while ($row = $result->fetchArray())
 echo '<div class="container">';
     echo '<div class="postbox">';
         echo '<div class="profile-field">';
-            echo '<img class="profile-img" src="' . $userProfileImg . '" width="48px" height="48px">';
+            echo '<img class="profile-img" id="profile-img" src="' . $userProfileImg . '" width="48px" height="48px">';
             echo '<h4>' . $userName . '</h4>';
         echo '</div>';
         echo '<a href="mailto:' . $userEmail . '">' . $userEmail . '</a>';
