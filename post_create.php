@@ -1,4 +1,4 @@
-<form class="form" id="form" onsubmit="checkPostInput();" action="post_process.php" method="POST" enctype="multipart/form-data">
+<form class="form" id="form" name="form" onsubmit="checkPostInput();" method="POST" action="post_process.php" enctype="multipart/form-data">
     
     <div class="form-control">
     <label>Bekännelse</label>
@@ -11,6 +11,10 @@
     <input class="custom-file-upload" type="file" name="file">
     <small>Error message</small>
     </div>
+    
+    <input type="hidden" value="<?=$_SESSION['userNname']?>" name="name" id="name">
+    <input type="hidden" value="<?=$_SESSION['userEmail']?>" name="email" id="email">
+    <input type="hidden" value="<?=$_SESSION['userID']?>" name="userID" id="userID">
     
     <button type="submit" name="submit" id="submit">Skicka</button>
     <!--<button onclick="document.location='logout_process.php'" name="logout" id="logout">Logga ut</button>-->

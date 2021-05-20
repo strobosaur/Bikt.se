@@ -44,6 +44,7 @@ function userExists($userID){
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':email', $userID, SQLITE3_TEXT);
         $stmt->bindParam(':nname', $userID, SQLITE3_TEXT);
+        
     } else if (gettype($userID) == "integer") {
 
         // DATA TYPE INTEGER
@@ -294,18 +295,7 @@ function changeProfileImg($userID, $filePath) {
         $stmt1->bindParam(':email', $userID, SQLITE3_TEXT);
         $stmt1->bindParam(':profileImg', $filePath, SQLITE3_TEXT);
 
-        // UPDATE PROFILEIMG DB
-        /*$sql2 = "UPDATE 'profileImg'
-                SET filePath = :filePath, hasImg = :hasImg
-                WHERE userID = :userID";
-
-        $stmt2 = $db->prepare($sql2);
-
-        $stmt2->bindParam(':userID', $userID, SQLITE3_INTEGER);
-        $stmt2->bindParam(':hasImg', 1, SQLITE3_INTEGER);
-        $stmt2->bindParam(':filePath', $filePath, SQLITE3_TEXT);*/
-
-        if (($stmt1->execute())/* && ($stmt2->execute())*/) {
+        if ($stmt1->execute()) {
             $db->close();
             return true;
         } else {
@@ -322,7 +312,7 @@ function fetchProfileImg($userID) {
         if ($result['profileImg'] != null) {
             return $result['profileImg'];
         } else {
-            return false;
+            return "./img/default_profile_img.php";
         }
     } else {
         return false;
