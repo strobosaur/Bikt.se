@@ -16,7 +16,7 @@
 </head>
 
     <body>
-        <nav>
+        <nav id="nav-menu" name="nav-menu">
             <ul>
                 <?php
                 if (isset($_SESSION['userID'])){

@@ -8,11 +8,13 @@
         require_once './include/login.inc.php';
 
         if (loginUser($_POST['login_email'], $_POST['login_password'])){
-            header("Location: loggedIn.php");
-            exit();
-        } else {            
-            header("Location: loggedInFailed.php");
-            exit();
+            echo true;
+            /*header("Location: loggedIn.php");
+            exit();*/
+        } else {
+            echo false;
+            /*header("Location: loggedInFailed.php");
+            exit();*/
         }
     }
 ?>

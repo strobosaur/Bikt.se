@@ -15,7 +15,7 @@ $login_form =
             <h4>Login</h4>    
         </div>
 
-        <form class="form" id="form" onsubmit="checkLoginInput();" action="login_process.php" method="POST">
+        <form class="form" id="form-login" name="form-login" onsubmit="checkLoginInput();" action="login_process.php" method="POST">
                                 
             <div class="form-control">
             <label>Mailadress</label>
