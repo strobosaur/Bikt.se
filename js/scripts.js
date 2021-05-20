@@ -6,8 +6,6 @@ function updatePostsAjax(){
     });
 }
 
-setInterval(updatePostsAjax, 1000);
-
 // FUNCTION GET LOGIN FORM
 function getLoginAjax(){
     $.post("login_ajax.php", function(data){
