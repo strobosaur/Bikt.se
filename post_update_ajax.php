@@ -13,6 +13,8 @@ $result = $db->query($sql);
 $comments = '';
 while ($row = $result->fetchArray()) {
     $userProfileImg = fetchProfileImg($row['userEmail']);
+    $postDateTime = $row['postDateTime'];
+    $dateTime = getDateFromDateTime($postDateTime) . " - " . getTimeFromDateTime($postDateTime);
 
     $comments .= 
     '<div class="container">
@@ -30,6 +32,7 @@ while ($row = $result->fetchArray()) {
     }
 
     $comments .= '</p>
+    <small>' . $dateTime . '</small>
     <form class="form-link-btn" id="form-delete-btn" name="form-delete-btn" action="post_delete.php" method="POST">
         <input type="hidden" value="' . $row['postID'] . '" id="postID" name="postID">
         <button class="link-btn" type="submit" name="post-delete" id="post-delete">Radera</button>

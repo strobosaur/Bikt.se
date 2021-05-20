@@ -113,8 +113,8 @@ $(document).ready(function(){
 
                 getMenuAjax();
             } else {
-                getPostformAjax();
-                $("#form-post").append("<p><br>Inloggningen misslyckades</p>");
+                getLoginAjax();
+                $("#form-login").append("<p><br>Inloggningen misslyckades</p>");
 
                 getMenuAjax();
             }
