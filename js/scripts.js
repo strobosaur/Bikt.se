@@ -1,12 +1,12 @@
 // FUNCTION UPDATE POSTS
-function getPostsAjax(){
+function updatePostsAjax(){
     $.get("post_update_ajax.php", function(data){
         $("#post-column").empty();
         $("#post-column").append(data);
     });
 }
 
-setInterval(getPostsAjax, 1000);
+setInterval(updatePostsAjax, 1000);
 
 // FUNCTION GET LOGIN FORM
 function getLoginAjax(){
@@ -67,7 +67,6 @@ $(document).ready(function(){
                 $('#name').val('');
                 $('#msgtext').val('');
                 $('#ajax').append(response);
-                console.log(data);
             }
         });
     });
@@ -86,7 +85,6 @@ $(document).ready(function(){
             },
             success: function(data){
                 getPostsAjax();
-                console.log(data);
             }
         });
     });
@@ -133,6 +131,12 @@ $(document).ready(function(){
         e.preventDefault();
         getLoginAjax();
     })
+
+    // NAVIGATION MENU LOGIN
+    /*$('#menu_home').click(function(e) {
+        e.preventDefault();
+        getPostformAjax();
+    })*/
 
     // NAVIGATION MENU LOGOUT
     $('#menu_logout').click(function(e) {
