@@ -81,13 +81,13 @@ $(document).ready(function(){
             url: 'post_process_ajax.php',
             type: 'POST',
             data: {
-            'post_delete': 1,
-            'postID': id,
-        },
-        success: function(data){
-            getPostsAjax();
-            console.log(data);
-        }
+                'post_delete': 1,
+                'postID': id,
+            },
+            success: function(data){
+                getPostsAjax();
+                console.log(data);
+            }
         });
     });
 
@@ -102,23 +102,23 @@ $(document).ready(function(){
             url: 'login_process.php',
             type: 'POST',
             data: {
-            'login': 1,
-            'login_email': uname,
-            'login_password': pwd,
-        },
-        success: function(response){
-            if (response == true) {
-                getPostformAjax();
-                $("#form-post").append("<p><br>Inloggningen lyckades</p>");
+                'login': 1,
+                'login_email': uname,
+                'login_password': pwd,
+            },
+            success: function(response){
+                if (response == true) {
+                    getPostformAjax();
+                    $("#form-post").append("<p><br>Inloggningen lyckades</p>");
 
-                getMenuAjax();
-            } else {
-                getLoginAjax();
-                $("#form-login").append("<p><br>Inloggningen misslyckades</p>");
+                    getMenuAjax();
+                } else {
+                    getLoginAjax();
+                    $("#form-login").append("<p><br>Inloggningen misslyckades</p>");
 
-                getMenuAjax();
+                    getMenuAjax();
+                }
             }
-        }
         })
     })
 
