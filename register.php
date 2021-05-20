@@ -51,19 +51,7 @@ require_once 'header.php';
                 <button type="submit" name="submit" id="submit">Registrera</button>
 
                 <?php
-                if (isset($_GET['error'])) {
-                    if ($_GET['error'] == "") {
-                        echo "<p>Något gick fel</p>";
-                    } else if ($_GET['error'] == "usernametaken") {
-                        ?>
-                        <script>setErrorFor(document.getElementById('nname', "Användarnamnet är redan registrerat"));</script>
-                        <?php
-                    } else if ($_GET['error'] == "useremailtaken") {
-                        ?>
-                        <script>setErrorFor(document.getElementById('email', "Epostadressen är redan registrerad"));</script>
-                        <?php
-                    }
-                }
+                    include_once "register_errors.php";
                 ?>
                 
             </form>
