@@ -5,7 +5,7 @@ $nav_menu =
     if (isset($_SESSION['userID'])){
         $nav_menu .=
         '<li><a id="menu_home" href="index.php">Home</a></li>
-        <li><a id="menu_profile" href="profile.php">Profile</a></li>
+        <li><a id="menu_profile" href="profile.php">' . $_SESSION['userNname'] . 'Profile</a></li>
         <li><a id="menu_search" href="search.php">Sök</a></li>
         <li><a id="menu_logout" href="logout_process.php">Log out</a></li>';
     } else {

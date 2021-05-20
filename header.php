@@ -21,7 +21,7 @@
                 <?php
                 if (isset($_SESSION['userID'])){
                     echo '<li><a id="menu_home" href="index.php">Home</a></li>';
-                    echo '<li><a id="menu_profile" href="profile.php">Profile</a></li>';
+                    echo '<li><a id="menu_profile" href="profile.php">' . $_SESSION['userNname'] . '</a></li>';
                     echo '<li><a id="menu_search" href="search.php">Sök</a></li>';
                     echo '<li><a id="menu_logout" href="logout_process.php">Log out</a></li>';
                 } else {
