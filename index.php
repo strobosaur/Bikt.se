@@ -1,6 +1,5 @@
 <?php
-require_once 'header.php';
-//include 'post_update_ajax.php';
+    require_once 'header.php';
 ?>
 
 <!-- CREATE POST / LOGIN CONTAINER -->
@@ -18,11 +17,9 @@ require_once 'header.php';
 
 <!-- POSTS CONTAINER -->
 <div class="flex-container2" id="flex-container2">
-    <div id="ajax">
+    <div id="post-column">
     </div>
 </div>
-
-<script src="./js/scripts.js"></script>
 
 <?php
 require_once 'footer.php';
