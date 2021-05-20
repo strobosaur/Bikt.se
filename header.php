@@ -18,15 +18,15 @@
     <body>
         <nav>
             <ul>
-                <li><a href="index.php">Home</a></li>
                 <?php
                 if (isset($_SESSION['userID'])){
-                    echo '<li><a href="profile.php">Profile</a></li>';
-                    echo '<li><a href="search.php">Sök</a></li>';
-                    echo '<li><a href="logout_process.php">Log out</a></li>';
+                    echo '<li><a id="menu_home" href="index.php">Home</a></li>';
+                    echo '<li><a id="menu_profile" href="profile.php">Profile</a></li>';
+                    echo '<li><a id="menu_search" href="search.php">Sök</a></li>';
+                    echo '<li><a id="menu_logout" href="logout_process.php">Log out</a></li>';
                 } else {
-                    echo '<li><a href="index.php">Login</a></li>';
-                    echo '<li><a href="register.php">Register</a></li>';
+                    echo '<li><a id="menu_login" href="index.php">Login</a></li>';
+                    echo '<li><a id="menu_register" href="register.php">Register</a></li>';
                 }
                 ?>
             </ul>

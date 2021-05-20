@@ -225,7 +225,7 @@ ul li a:hover {
 }
 
 .formbox .form-control {
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   padding-bottom: 20px;
   position: relative;  
 }
@@ -311,7 +311,7 @@ ul li a:hover {
   padding: 10px;
   font-size: 16px;
   font-family: inherit;
-  margin-bottom: 24px;
+  /*margin-bottom: 24px;*/
 }
 
 .formbox .form button:hover {
