@@ -140,4 +140,66 @@ function uploadImg($fileName,$fileTmpName,$fileError) {
     }
 }
 
+// FUNCTION SEARCH POSTS
+function searchPosts($search){
+    $searchString = "%".$search."%";
+
+    $db = new SQLite3("./db/labb1.db");
+    $sql = "SELECT * FROM posts 
+            WHERE userName LIKE '%{$search}%'
+            OR userPost LIKE '%{$search}%'";
+
+    //$stmt = $db->prepare($sql);
+    //$stmt->bindParam(':keyword', $search, SQLITE3_TEXT);
+
+    if($result = $db->query($sql)){
+    //if($result = $stmt->execute()){
+        return $result;
+    } else {
+        return false;
+    }
+}
+
+function makePost($row){
+    $userProfileImg = fetchProfileImg($row['userEmail']);
+    $postDateTime = $row['postDateTime'];
+    $dateTime = getDateFromDateTime($postDateTime) . " - " . getTimeFromDateTime($postDateTime);
+
+    $post = 
+    '<div class="container">
+        <div class="postbox">
+            <div class="profile-field">
+                <img class="profile-img" id="profile-img" src="' . $userProfileImg . '" width="48px" height="48px">
+                <h4>' . $row['userName'] . '</h4>
+            </div>';
+            if (isset($_SESSION['userID'])) {
+                $post .= '<a href="mailto:' . $row['userEmail'] . '">' . $row['userEmail'] . '</a>';
+            }
+            
+            $post .= '<p>' . $row['userPost'];
+
+            // INSERT IMAGE IF UPLOADED
+            if ($row['postImage'] != null){
+                $post .= '<img src="' . $row['postImage'] . '">';
+            }
+
+            $post .= '</p>
+            <small>' . $dateTime . '</small>';
+
+            // DISPLAY DELETE BUTTON IF POSTER LOGGED IN
+            if ((isset($_SESSION['userID'])) && ($_SESSION['userID'] == $row['userID'])){
+                $post .= 
+                '<form class="form-link-btn" id="form-delete-btn" name="form-delete-btn" action="post_delete.php" method="POST">
+                    <input type="hidden" value="' . $row['postID'] . '" id="postID" name="postID">
+                    <button class="link-btn" type="submit" name="post-delete" id="post-delete">Radera</button>
+                </form>';
+            }
+
+            $post .= 
+        '</div>
+    </div>';
+
+    return $post;
+}
+
 ?>

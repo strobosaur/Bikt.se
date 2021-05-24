@@ -23,7 +23,7 @@
 
 <script>
 updatePostsAjax();
-setInterval(updatePostsAjax, 1000);
+var postUpdate = setInterval(updatePostsAjax, 1000);
 </script>
 
 <?php

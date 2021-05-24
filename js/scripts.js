@@ -6,6 +6,14 @@ function updatePostsAjax(){
     });
 }
 
+// FUNCTION UPDATE POSTS
+function getSearchResultsAjax(){
+    $.post("search_process.php", function(data){
+        $("#post-column").empty();
+        $("#post-column").append(data);
+    });
+}
+
 // FUNCTION GET LOGIN FORM
 function getLoginAjax(){
     $.post("login_ajax.php", function(data){
@@ -25,6 +33,14 @@ function getRegisterAjax(){
 // FUNCTION GET POST FORM
 function getPostformAjax(){
     $.post("post_create_ajax.php", function(data){
+        $("#flex-container1").empty();
+        $("#flex-container1").append(data);
+    });
+}
+
+// FUNCTION SEARCH POST FORM
+function getSearchAjax(){
+    $.post("search_ajax.php", function(data){
         $("#flex-container1").empty();
         $("#flex-container1").append(data);
     });
@@ -64,7 +80,7 @@ $(document).ready(function(){
             success: function(response){
                 $('#name').val('');
                 $('#msgtext').val('');
-                $('#ajax').append(response);
+                $('#post-column').append(response);
             }
         });
     });
@@ -82,7 +98,29 @@ $(document).ready(function(){
                 'postID': id,
             },
             success: function(data){
-                getPostsAjax();
+                updatePostsAjax();
+            }
+        });
+    });
+
+    // SEARCH POST IN DATABASE
+    $('#form-search').submit(function(e) {
+        e.preventDefault();
+
+        var keyword = $('#search_text').val();
+
+        $.ajax({
+            url: 'search_process_ajax.php',
+            type: 'POST',
+            data: {
+                'search': 1,
+                'search_text': keyword,
+            },
+            success: function(response){
+                clearInterval(postUpdate);
+                $('#search_text').val('');
+                $("#post-column").empty();
+                $('#post-column').append(response);
             }
         });
     });
@@ -108,11 +146,13 @@ $(document).ready(function(){
                     $("#form-post").append("<p><br>Inloggningen lyckades</p>");
 
                     getMenuAjax();
+                    $.getScript("./js/scripts.js");
                 } else {
                     getLoginAjax();
                     $("#form-login").append("<p><br>Inloggningen misslyckades</p>");
 
                     getMenuAjax();
+                    $.getScript("./js/scripts.js");
                 }
             }
         })
@@ -122,26 +162,39 @@ $(document).ready(function(){
     $('#menu_register').click(function(e) {
         e.preventDefault();
         getRegisterAjax();
+        $.getScript("./js/scripts.js");
     })
 
     // NAVIGATION MENU LOGIN
     $('#menu_login').click(function(e) {
         e.preventDefault();
         getLoginAjax();
+        $.getScript("./js/scripts.js");
+    })
+
+    // NAVIGATION MENU SEARCH
+    $('#menu_search').click(function(e) {
+        e.preventDefault();
+        getSearchAjax();
+        $.getScript("./js/scripts.js");
     })
 
     // NAVIGATION MENU LOGIN
     /*$('#menu_home').click(function(e) {
         e.preventDefault();
         getPostformAjax();
+        $.getScript("./js/scripts.js");
     })*/
 
     // NAVIGATION MENU LOGOUT
     $('#menu_logout').click(function(e) {
         e.preventDefault();
         $.post("logout_process.php", function(){
+            location.href = "index.php";
             getLoginAjax();
             getMenuAjax();
+            updatePostsAjax();
+            $.getScript("./js/scripts.js");
         })
     })
 });

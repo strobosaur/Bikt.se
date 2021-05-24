@@ -18,14 +18,14 @@ $login_form =
         <form class="form" id="form-login" name="form-login" onsubmit="checkLoginInput();" action="" method="POST">
                                 
             <div class="form-control">
-            <label>Mailadress</label>
-            <input type="text" placeholder="anon@mail.com" name="login_email" id="login_email">
+            <label>Användarnamn</label>
+            <input type="text" placeholder="namn / epost" name="login_email" id="login_email">
             <small>Error message</small>
             </div>
                             
             <div class="form-control">
             <label>Lösenord</label>
-            <input type="password" placeholder="Password" name="login_password" id="login_password">
+            <input type="password" placeholder="password" name="login_password" id="login_password">
             <small>Error message</small>
             </div>
             
