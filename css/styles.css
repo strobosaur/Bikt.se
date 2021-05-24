@@ -41,7 +41,9 @@ ul li a {
 
 ul li a:hover {
   color: white;
-  text-decoration: underline;
+  background-color: rgb(29, 29, 29);
+  filter: brightness(130%);
+  /*text-decoration: underline;*/
 }
 
 .flex-container1 {
@@ -52,13 +54,13 @@ ul li a:hover {
 }
 
 .flex-container2 {
-  align-items: center;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 100vh;
-  margin: 0 auto 0 360px;
-  width: 336px;
+  min-height: auto;
+  margin: 0 auto 0 352px;
+  width: calc(100% - 352px);
+  min-width: 352px;
   padding-top: 24px;
 }
 
@@ -237,6 +239,8 @@ ul li a:hover {
 
 .formbox .form-control input {
   border: 3px solid #677f7f;
+  background-color: darkslategrey;
+  color: white;
   border-radius: 8px;
   display: block;
   font-family: inherit;
@@ -259,6 +263,8 @@ ul li a:hover {
 }
 
 .formbox .form-control textarea {
+  background-color: darkslategrey;
+  color: white;
   border: 3px solid #677f7f;
   border-radius: 8px;
   display: block;
@@ -267,6 +273,24 @@ ul li a:hover {
   padding: 10px;
   font-size: 14px;
   resize: none;
+}
+
+.formbox .form button {
+  cursor: pointer;
+  background-color: darkslategrey;
+  border: 2px solid darkslategrey;
+  color: #c6cfcf;
+  display: block;
+  width: 100%;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+  font-family: inherit;
+  /*margin-bottom: 24px;*/
+}
+
+.formbox .form button:hover {
+  filter: brightness(130%);
 }
 
 .formbox .form-control.success input {
@@ -299,21 +323,4 @@ ul li a:hover {
 .formbox .form-control.error small {
   visibility: visible;
   color: #e74c3c;
-}
-
-.formbox .form button {
-  background-color: #415f5f;
-  border: 2px solid #415f5f;
-  color: #c6cfcf;
-  display: block;
-  width: 100%;
-  border-radius: 8px;
-  padding: 10px;
-  font-size: 16px;
-  font-family: inherit;
-  /*margin-bottom: 24px;*/
-}
-
-.formbox .form button:hover {
-  background-color: #546f6f;
 }

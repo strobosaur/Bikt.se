@@ -2,6 +2,14 @@
     require_once 'header.php';
 ?>
 
+<?php
+    // ENSURE USER IS LOGGED IN
+    if(!isset($_SESSION['userID'])){
+        header("location: index.php");
+        exit();
+    }
+?>
+
 <style>
 .flex-container2 {
     width:512px;
@@ -12,15 +20,6 @@
     width: 100%;
 }
 </style>
-
-
-<?php
-    // ENSURE USER IS LOGGED IN
-    if(!isset($_SESSION['userID'])){
-        header("location: index.php");
-        exit();
-    }
-?>
 
 <div class="flex-container2">
     <div class="container">
