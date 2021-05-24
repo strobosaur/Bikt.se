@@ -275,6 +275,7 @@ function uploadProfileImg($userID,$fileName,$fileTmpName,$fileError) {
     }
 }
 
+// FUNCTION CHANGE PROFILE IMAGE
 function changeProfileImg($userID, $filePath) {
 
     $result = userExists($userID);

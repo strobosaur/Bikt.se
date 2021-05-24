@@ -147,7 +147,8 @@ function searchPosts($search){
     $db = new SQLite3("./db/labb1.db");
     $sql = "SELECT * FROM posts 
             WHERE userName LIKE '%{$search}%'
-            OR userPost LIKE '%{$search}%'";
+            OR userPost LIKE '%{$search}%'
+            ORDER BY postID DESC";
 
     //$stmt = $db->prepare($sql);
     //$stmt->bindParam(':keyword', $search, SQLITE3_TEXT);
@@ -160,6 +161,7 @@ function searchPosts($search){
     }
 }
 
+// FUNCTION MAKE POST FROM ROW
 function makePost($row){
     $userProfileImg = fetchProfileImg($row['userEmail']);
     $postDateTime = $row['postDateTime'];
