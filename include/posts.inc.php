@@ -142,23 +142,29 @@ function uploadImg($fileName,$fileTmpName,$fileError) {
 
 // FUNCTION SEARCH POSTS
 function searchPosts($search){
-    $searchString = "%".$search."%";
 
+    // PREPARE QUERY
     $db = new SQLite3("./db/labb1.db");
     $sql = "SELECT * FROM posts 
-            WHERE userName LIKE '%{$search}%'
-            OR userPost LIKE '%{$search}%'
+            WHERE userName LIKE :search
+            OR userPost LIKE :search
             ORDER BY postID DESC";
 
-    //$stmt = $db->prepare($sql);
-    //$stmt->bindParam(':keyword', $search, SQLITE3_TEXT);
-
-    if($result = $db->query($sql)){
-    //if($result = $stmt->execute()){
-        return $result;
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':search', "%".$search."%", SQLITE3_TEXT);
+  
+    //CREATE POSTS STRING
+    if($result = $stmt->execute()){
+        $posts = '';
+        while($row = $result->fetchArray()){
+            $posts .= makePost($row);
+        }
     } else {
         return false;
     }
+
+    $db->close();
+    return $posts;
 }
 
 // FUNCTION MAKE POST FROM ROW

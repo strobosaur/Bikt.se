@@ -11,18 +11,23 @@ session_start();
 
         $keyword = $_POST['search_text'];
         $result = searchPosts($keyword);
+        if($result !== false){
+            echo $result;
+        } else {
+            echo false;
+        }
         
-        /*var_dump($result);
+        /*print_r($result);
         exit();*/
 
-        if ($result !== false){
-            $posts ='';
+        /*if ($result !== false){
+            $posts = '';
             while($row = $result->fetchArray()){
                 $posts .= makePost($row);
             }
             echo $posts;
         } else {
             echo false;
-        }
+        }*/
     }
 ?>
