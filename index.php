@@ -8,9 +8,15 @@
     <!-- FORM HANDLING -->
     <?php
         if(isset($_SESSION['userID'])) {
-            require_once 'post_create.php';
+            ?>
+            <script>getPostformAjax();</script>
+            <?php
+            //require_once 'post_create.php';
         } else {
-            require_once 'login.php';
+            ?>
+            <script>getLoginAjax();</script>
+            <?php
+            //require_once 'login.php';
         }
     ?>
 </div>

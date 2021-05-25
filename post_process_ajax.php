@@ -3,14 +3,19 @@
 require_once './include/login.inc.php';
 require_once './include/posts.inc.php';
 
-if (isset($_POST["post_send"])) {
+if (isset($_POST["userID"])) {
+
+    //print_r($_POST['form_data']);
+    //exit();
+    /*print_r($_FILES);
+    exit();*/
 
     $db = new SQLite3("./db/labb1.db");
 
     $userID = $_POST['userID'];
-    $userName = $_POST['username'];
+    $userName = $_POST['name'];
     $userEmail = $_POST['email'];
-    $userPost = $_POST['post_text'];
+    $userPost = $_POST['msgtext'];
     $userProfileImg = fetchProfileImg($userID);
 
     $sql = "INSERT INTO posts (userID, userName, userEmail, userPost, postImage) 
@@ -24,22 +29,16 @@ if (isset($_POST["post_send"])) {
     $stmt->bindParam(':userPost', $userPost, SQLITE3_TEXT);
 
     // HANDLE IMAGE UPLOAD
-    if (isset($_POST['img_upload'])){
-        $imageUpload = $_POST['img_upload'];
-        if ($imageUpload['file']['error'] === 0){
+    if ($_FILES['file']['error'] === 0){
 
-            $fileName = $_FILES['file']['name'];
-            $fileTmpName = $_FILES['file']['tmp_name'];
-            $fileSize = $_FILES['file']['size'];
-            $fileError = $_FILES['file']['error'];
-            $fileType = $_FILES['file']['type'];
-            
-            $fileDestination = uploadImg($fileName,$fileTmpName,$fileError);
-            $stmt->bindParam(':postImage', $fileDestination, SQLITE3_TEXT);
-        } else {
-            $fileDestination = null;
-            $stmt->bindParam(':postImage', $fileDestination, SQLITE3_NULL);
-        }
+        $fileName = $_FILES['file']['name'];
+        $fileTmpName = $_FILES['file']['tmp_name'];
+        $fileSize = $_FILES['file']['size'];
+        $fileError = $_FILES['file']['error'];
+        $fileType = $_FILES['file']['type'];
+        
+        $fileDestination = uploadImg($fileName,$fileTmpName,$fileError);
+        $stmt->bindParam(':postImage', $fileDestination, SQLITE3_TEXT);
     } else {
         $fileDestination = null;
         $stmt->bindParam(':postImage', $fileDestination, SQLITE3_NULL);

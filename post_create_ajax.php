@@ -24,7 +24,7 @@ $post_form =
             
             <div class="form-control">
             <label>Bild</label>
-            <input class="custom-file-upload" type="file" name="file">
+            <input class="custom-file-upload" type="file" name="file" id="file">
             <small>Error message</small>
             </div>
             
@@ -32,7 +32,7 @@ $post_form =
             <input type="hidden" value="' . $_SESSION["userEmail"] . '" name="email" id="email">
             <input type="hidden" value="' . $_SESSION["userID"] . '" name="userID" id="userID">
             
-            <button type="submit" name="submit" id="submit">Skicka</button> 
+            <button type="submit" name="post-submit" id="post-submit">Skicka</button> 
 
             <?php
                 include_once "post_errors.php";

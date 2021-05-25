@@ -19,6 +19,7 @@ function getLoginAjax(){
     $.post("login_ajax.php", function(data){
         $("#flex-container1").empty();
         $("#flex-container1").append(data);
+        $.getScript("./js/scripts.js");
     });
 }
 
@@ -27,6 +28,7 @@ function getRegisterAjax(){
     $.post("register_ajax.php", function(data){
         $("#flex-container1").empty();
         $("#flex-container1").append(data);
+        $.getScript("./js/scripts.js");
     });
 }
 
@@ -35,6 +37,7 @@ function getPostformAjax(){
     $.post("post_create_ajax.php", function(data){
         $("#flex-container1").empty();
         $("#flex-container1").append(data);
+        $.getScript("./js/scripts.js");
     });
 }
 
@@ -43,6 +46,7 @@ function getSearchAjax(){
     $.post("search_ajax.php", function(data){
         $("#flex-container1").empty();
         $("#flex-container1").append(data);
+        $.getScript("./js/scripts.js");
     });
 }
 
@@ -51,6 +55,7 @@ function getMenuAjax(){
     $.post("nav_menu_ajax.php", function(data){
         $("#nav-menu").empty();
         $("#nav-menu").append(data);
+        $.getScript("./js/scripts.js");
     });
 }
 
@@ -59,27 +64,18 @@ $(document).ready(function(){
     // SEND POST TO DATABASE
     $('#form-post').submit(function(e) {
         e.preventDefault();
-
-        var username = $('#name').val();
-        var post_text = $('#msgtext').val();
-        var email = $('#email').val();
-        var userID = $('#userID').val();
-        //var img_upload = $('#file');
+        var formData = new FormData(this);
 
         $.ajax({
             url: 'post_process_ajax.php',
             type: 'POST',
-            data: {
-                'post_send': 1,
-                'username': username,
-                'post_text': post_text,
-                'email': email,
-                'userID': userID,
-                //'img_upload': img_upload,
-            },
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
             success: function(response){
-                $('#name').val('');
                 $('#msgtext').val('');
+                $('#file').val(null);
                 $('#post-column').append(response);
             }
         });
