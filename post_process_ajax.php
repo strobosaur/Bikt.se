@@ -1,14 +1,13 @@
 <?php 
 
-require_once './include/login.inc.php';
-require_once './include/posts.inc.php';
+// PROTECTION
+if (!isset($_POST["post-submit"])) {
+    header("location: index.php");
+    exit();
+} else {
 
-if (isset($_POST["userID"])) {
-
-    //print_r($_POST['form_data']);
-    //exit();
-    /*print_r($_FILES);
-    exit();*/
+    require_once './include/login.inc.php';
+    require_once './include/posts.inc.php';
 
     $db = new SQLite3("./db/labb1.db");
 
@@ -46,65 +45,44 @@ if (isset($_POST["userID"])) {
 
     // EXECUTE STATEMENT
     if ($stmt->execute()) {
+        $db->close();
+        $db = new SQLite3("./db/labb1.db");
 
-    $result = $db->query("SELECT last_insert_rowid() AS last_insert_rowid")->fetchArray();
-    $postID = $result['last_insert_rowid'];
+        $result = $db->query("SELECT last_insert_rowid() AS last_insert_rowid")->fetchArray();
+        $postID = $result['last_insert_rowid'];
 
-    // POST CONTAINER
-    $posted_comment = 
-        '<div class="container">
-        <div class="postbox">
-        <div class="profile-field">
-            <img class="profile-img" src="' . $userProfileImg . '" width="48px" height="48px">
-            <h4>' . $userName . '</h4>
-        </div>
-        <a href="mailto:' . $userEmail . '">' . $userEmail . '</a>
-        <p>' . $userPost;
+        // CREATE POST CONTAINER
+        $posted_comment = 
+            '<div class="container">
+            <div class="postbox">
+            <div class="profile-field">
+                <img class="profile-img" src="' . $userProfileImg . '" width="48px" height="48px">
+                <h4>' . $userName . '</h4>
+            </div>
+            <a href="mailto:' . $userEmail . '">' . $userEmail . '</a>
+            <p>' . $userPost;
 
-        // INSERT IMAGE IF UPLOADED
-        if ($fileDestination != null){
-            $posted_comment .= '<img src="' . $fileDestination . '">';
-        }
+            // INSERT IMAGE IF UPLOADED
+            if ($fileDestination != null){
+                $posted_comment .= '<img src="' . $fileDestination . '">';
+            }
 
-        $posted_comment .= '</p>
-        <form class="form-link-btn" action="post_delete.php" method="POST">
-            <input type="hidden" value="' . $postID . '" name="postID">
-            <button class="link-btn" type="submit" name="post-delete" id="post-delete">Radera</button>
-        </form>
-        </div>
-        </div>';
+            $posted_comment .= '</p>
+            <form class="form-link-btn" action="post_delete.php" method="POST">
+                <input type="hidden" value="' . $postID . '" name="postID">
+                <button class="link-btn" type="submit" name="post-delete" id="post-delete">Radera</button>
+            </form>
+            </div>
+            </div>';
 
         $db->close();
         echo $posted_comment;
+        exit();
     } else {
+        $db->close();
         echo "Error: ";
+        exit();
     }
-    exit();
-}
-
-// DELETE POST
-if (isset($_POST['post_delete'])) {
-
-    $postID = $_POST['postID'];
-    $result = postExists($postID);
-
-    // DELETE IMAGE
-    if($result['postImage'] != null){
-        unlink($result['postImage']);
-    }
-
-    // PREPARE DB QUERY
-    $db = new SQLite3("./db/labb1.db");
-    $sql = "DELETE FROM posts WHERE postID = :postID";
-
-    $stmt = $db->prepare($sql);
-
-    $stmt->bindParam(':postID', $postID, SQLITE3_INTEGER);
-
-    $stmt->execute();
-    $db->close();
-
-    exit();
 }
 /*
 if (isset($_POST['update'])) {

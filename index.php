@@ -1,5 +1,5 @@
 <?php
-    require_once 'header.php';
+    require_once './include/views/_header.php';
 ?>
 
 <!-- CREATE POST / LOGIN CONTAINER -->
@@ -9,14 +9,18 @@
     <?php
         if(isset($_SESSION['userID'])) {
             ?>
-            <script>getPostformAjax();</script>
+            <script>
+                getPostformAjax();
+                $.getScript("./js/scripts.js");
+            </script>
             <?php
-            //require_once 'post_create.php';
         } else {
             ?>
-            <script>getLoginAjax();</script>
+            <script>
+                getLoginAjax();
+                $.getScript("./js/scripts.js");
+            </script>
             <?php
-            //require_once 'login.php';
         }
     ?>
 </div>
@@ -28,10 +32,12 @@
 </div>
 
 <script>
-updatePostsAjax();
-var postUpdate = setInterval(updatePostsAjax, 1000);
+    $(document).ready(function(){
+        updatePostsAjax();
+    });
+    var postUpdate = setInterval(updatePostsAjax, 2500);
 </script>
 
 <?php
-require_once 'footer.php';
+    require_once './include/views/_footer.php';
 ?>

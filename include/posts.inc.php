@@ -13,59 +13,6 @@ function getDateFromDateTime($dateTime){
     return str_replace("-","/",$dateRaw[0]);
 }
 
-// FUNCTION VALIDATE & ADD COMMENT FUNCTION
-function addPost($userID,$userName,$userEmail,$userPost,$imgFilePath = null)
-{
-    require_once 'login.inc.php';
-
-    // TRIM VARIABLES
-    $userNameValue = trim($userName);
-    $userEmailValue = trim($userEmail);
-    $userPostValue = trim($userPost);
-
-    // INPUT VALIDATION
-    if (strlen($userNameValue) < 3) {
-        header("location: index.php?error=nametooshort");
-        exit();
-    } else if (!isEmail($userEmailValue)) {
-        header("location: index.php?error=invalidemail");
-        exit();
-    } else if (strlen($userPostValue) < 10) {
-        header("location: index.php?error=posttooshort");
-        exit();
-    } else {
-
-        // PREPARE QUERY
-        $db = new SQLite3("./db/labb1.db");
-
-        $sql = "INSERT INTO 'posts' (userID, userName, userEmail, userPost, postImage)
-        VALUES (:userID, :userName, :userEmail, :userPost, :postImage)";
-
-        $stmt = $db->prepare($sql);
-
-        $stmt->bindParam(':userID', $userID, SQLITE3_INTEGER);
-        $stmt->bindParam(':userName', $userNameValue, SQLITE3_TEXT);
-        $stmt->bindParam(':userEmail', $userEmailValue, SQLITE3_TEXT);
-        $stmt->bindParam(':userPost', $userPostValue, SQLITE3_TEXT);
-
-        // HANDLE POST IMAGE
-        if ($imgFilePath === null) {
-            $stmt->bindParam(':postImage', $imgFilePath, SQLITE3_NULL);
-        } else {
-            $stmt->bindParam(':postImage', $imgFilePath, SQLITE3_TEXT);
-        }
-
-        // EXECUTE QUERY
-        if ($stmt->execute()){
-            $db->close();
-            return true;
-        } else {
-            $db->close();
-            return false;
-        }
-    }
-}
-
 // FUNCTION CHECK IF POST EXISTS
 function postExists($postID)
 {
@@ -108,12 +55,12 @@ function deletePost($postID)
 
         // EXECUTE QUERY
         if ($stmt->execute()) {
+            header("location: index.php");
             $db->close();
-            header("location: index.php?error=postremoved");
             exit();
         } else {
+            header("location: index.php");
             $db->close();
-            header("location: index.php?error=postnotremoved");
             exit();
         }
     }

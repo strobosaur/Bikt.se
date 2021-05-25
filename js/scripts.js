@@ -1,103 +1,98 @@
 // FUNCTION UPDATE POSTS
-function updatePostsAjax(){
-    $.post("post_update_ajax.php", function(data){
-        $("#post-column").empty();
-        $("#post-column").append(data);
-    });
-}
-
-// FUNCTION UPDATE POSTS
 function getSearchResultsAjax(){
-    $.post("search_process.php", function(data){
-        $("#post-column").empty();
-        $("#post-column").append(data);
+    $.ajax({
+        url: 'search_process_ajax.php',
+        type: 'POST',
+        data: {
+            'search': 1,
+        },
+        success: function(response){
+            $("#post-column").empty();
+            $("#post-column").append(response);
+        }
     });
 }
 
 // FUNCTION GET LOGIN FORM
 function getLoginAjax(){
-    $.post("login_ajax.php", function(data){
-        $("#flex-container1").empty();
-        $("#flex-container1").append(data);
-        $.getScript("./js/scripts.js");
+    $.ajax({
+        url: './include/views/login_ajax.php',
+        type: 'POST',
+        data: {
+            'get_login': 1,
+        },
+        success: function(response){
+            $("#flex-container1").empty();
+            $("#flex-container1").append(response);
+            $.getScript("./js/login.js");
+        }
     });
 }
 
 // FUNCTION GET REGISTER FORM
 function getRegisterAjax(){
-    $.post("register_ajax.php", function(data){
-        $("#flex-container1").empty();
-        $("#flex-container1").append(data);
-        $.getScript("./js/scripts.js");
+    $.ajax({
+        url: './include/views/register_ajax.php',
+        type: 'POST',
+        data: {
+            'get_register': 1,
+        },
+        success: function(response){
+            $("#flex-container1").empty();
+            $("#flex-container1").append(response);
+        }
     });
 }
 
 // FUNCTION GET POST FORM
 function getPostformAjax(){
-    $.post("post_create_ajax.php", function(data){
-        $("#flex-container1").empty();
-        $("#flex-container1").append(data);
-        $.getScript("./js/scripts.js");
+    $.ajax({
+        url: './include/views/post_create_ajax.php',
+        type: 'POST',
+        data: {
+            'get_postform': 1,
+        },
+        success: function(response){
+            $("#flex-container1").empty();
+            $("#flex-container1").append(response);
+            $.getScript("./js/post.js");
+        }
     });
 }
 
 // FUNCTION SEARCH POST FORM
 function getSearchAjax(){
-    $.post("search_ajax.php", function(data){
-        $("#flex-container1").empty();
-        $("#flex-container1").append(data);
-        $.getScript("./js/scripts.js");
+    $.ajax({
+        url: './include/views/search_ajax.php',
+        type: 'POST',
+        data: {
+            'get_search': 1,
+        },
+        success: function(response){
+            $("#flex-container1").empty();
+            $("#flex-container1").append(response);
+        }
     });
 }
 
 // FUNCTION GET MENU
 function getMenuAjax(){
-    $.post("nav_menu_ajax.php", function(data){
-        $("#nav-menu").empty();
-        $("#nav-menu").append(data);
-        $.getScript("./js/scripts.js");
+    $.ajax({
+        url: './include/views/nav_menu_ajax.php',
+        type: 'POST',
+        data: {
+            'get_menu': 1,
+        },
+        success: function(response){
+            $("#nav-menu").empty();
+            $("#nav-menu").append(response);
+            $.getScript("./js/scripts.js");
+        }
     });
 }
 
+// WAIT FOR DOCUMENT LOAD
 $(document).ready(function(){
-
-    // SEND POST TO DATABASE
-    $('#form-post').submit(function(e) {
-        e.preventDefault();
-        var formData = new FormData(this);
-
-        $.ajax({
-            url: 'post_process_ajax.php',
-            type: 'POST',
-            data: formData,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function(response){
-                $('#msgtext').val('');
-                $('#file').val(null);
-                $('#post-column').append(response);
-            }
-        });
-    });
-
-    // DELETE POST FROM DATABASE
-    $('#form-delete-btn').submit(function(e){
-        e.preventDefault();
-
-        var id = $('#postID').val();
-        $.ajax({
-            url: 'post_process_ajax.php',
-            type: 'POST',
-            data: {
-                'post_delete': 1,
-                'postID': id,
-            },
-            success: function(data){
-                updatePostsAjax();
-            }
-        });
-    });
 
     // SEARCH POST IN DATABASE
     $('#form-search').submit(function(e) {
@@ -120,39 +115,6 @@ $(document).ready(function(){
             }
         });
     });
-
-    // LOGIN HANDLING
-    $('#form-login').submit(function(e){
-        e.preventDefault();
-
-        var uname = $("#login_email").val();
-        var pwd = $("#login_password").val();
-
-        $.ajax({
-            url: 'login_process.php',
-            type: 'POST',
-            data: {
-                'login': 1,
-                'login_email': uname,
-                'login_password': pwd,
-            },
-            success: function(response){
-                if (response == true) {
-                    getPostformAjax();
-                    $("#form-post").append("<p><br>Inloggningen lyckades</p>");
-
-                    getMenuAjax();
-                    $.getScript("./js/scripts.js");
-                } else {
-                    getLoginAjax();
-                    $("#form-login").append("<p><br>Inloggningen misslyckades</p>");
-
-                    getMenuAjax();
-                    $.getScript("./js/scripts.js");
-                }
-            }
-        })
-    })
 
     // NAVIGATION MENU REGISTER
     $('#menu_register').click(function(e) {
@@ -187,10 +149,10 @@ $(document).ready(function(){
         e.preventDefault();
         $.post("logout_process.php", function(){
             location.href = "index.php";
-            getLoginAjax();
             getMenuAjax();
             updatePostsAjax();
             $.getScript("./js/scripts.js");
+            $.getScript("./js/login.js");
         })
     })
 });

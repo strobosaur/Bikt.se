@@ -168,3 +168,19 @@ function checkLoginInput() {
 
   return isOk;
 }
+
+// FUNCTION UPDATE POSTS
+function updatePostsAjax(){
+  $.ajax({
+      url: 'post_update_ajax.php',
+      type: 'POST',
+      data: {
+          'update_posts': 1,
+      },
+      success: function(response){
+          $("#post-column").empty();
+          $("#post-column").append(response);
+          $.getScript("./js/delete_post.js");
+      }
+  });
+}
