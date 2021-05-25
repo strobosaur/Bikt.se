@@ -226,15 +226,11 @@ function loginUser($userID, $password){
     $userData = userExists($userID);
 
     if ($userData === false) {
-        /*header("location: ./index.php?error=nouser");
-        exit();*/
         return false;
     }
 
     // CHECK PASSWORD MATCH
     if (passwordMatchesDB($userID, $password) === false) {
-        /*header("location: ./index.php?error=wrongpwd");
-        exit();*/
         return false;
     } else {
         session_start();

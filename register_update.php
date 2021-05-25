@@ -2,7 +2,7 @@
 session_start();
 
 // VALIDATE INPUT AND STORE IN DATABASE
-if (!isset($_POST['update'])) {
+if (!isset($_POST['update']) || !isset($_SESSION['userID'])) {
     header("location: index.php");
     exit();
 } else {
