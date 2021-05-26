@@ -87,7 +87,7 @@ function checkRegInput() {
   
   // CHECK USER LAST NAME
   if ((nnameValue === '') || (nnameValue.length < 2)) {
-    setErrorFor(lname, 'Ange ett användarnamn');
+    setErrorFor(nname, 'Ange ett användarnamn');
     isOk = new Boolean(0);
   } else {
     setSuccessFor(nname);
@@ -152,7 +152,7 @@ function checkLoginInput() {
   // CHECK PASSWORD
   if ((passwordValue === '') 
   || (passwordValue.length < 8)) {
-    setErrorFor(password, 'Lösenordet måste vara minst 8 tecken');
+    setErrorFor(login_password, 'Lösenordet måste vara minst 8 tecken');
     isOk = new Boolean(0);
   } else {
     setSuccessFor(password);
