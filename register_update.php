@@ -20,9 +20,15 @@ if (!isset($_POST['update']) || !isset($_SESSION['userID'])) {
     
     if (updateUserProfile($_SESSION['userID'], $_POST['fname'], $_POST['lname'], $_POST['nname'], $_POST['email'], $_POST['password1'], $_POST['password2'])){
         header("Location: profile.php?error=none");
+        ?>
+        <script>setBottomBarMessage("Din profil har uppdaterats");</script>
+        <?php
         exit();
     } else {
         header("Location: profile.php?error=invalidinput");
+        ?>
+        <script>setBottomBarMessage("Något gick fel");</script>
+        <?php
         exit();
     }
 }

@@ -48,32 +48,11 @@ if (!isset($_POST["post-submit"])) {
         $db->close();
         $db = new SQLite3("./db/labb1.db");
 
-        $result = $db->query("SELECT last_insert_rowid() AS last_insert_rowid")->fetchArray();
-        $postID = $result['last_insert_rowid'];
+        $lastID = $db->query("SELECT last_insert_rowid() AS last_insert_rowid")->fetchArray();
+        $row = postExists($lastID['last_insert_rowid']);
 
         // CREATE POST CONTAINER
-        $posted_comment = 
-            '<div class="container">
-            <div class="postbox">
-            <div class="profile-field">
-                <img class="profile-img" src="' . $userProfileImg . '" width="48px" height="48px">
-                <h4>' . $userName . '</h4>
-            </div>
-            <a href="mailto:' . $userEmail . '">' . $userEmail . '</a>
-            <p>' . $userPost;
-
-            // INSERT IMAGE IF UPLOADED
-            if ($fileDestination != null){
-                $posted_comment .= '<img src="' . $fileDestination . '">';
-            }
-
-            $posted_comment .= '</p>
-            <form class="form-link-btn" action="post_delete.php" method="POST">
-                <input type="hidden" value="' . $postID . '" name="postID">
-                <button class="link-btn" type="submit" name="post-delete" id="post-delete">Radera</button>
-            </form>
-            </div>
-            </div>';
+        $posted_comment = makePost($row);
 
         $db->close();
         echo $posted_comment;
@@ -84,26 +63,5 @@ if (!isset($_POST["post-submit"])) {
         exit();
     }
 }
-/*
-if (isset($_POST['update'])) {
-    $id = $_POST['id'];
-    $name = $_POST['name'];
-    $comment = $_POST['comment'];
-    $sql = "UPDATE comments SET name='{$name}', comment='{$comment}' WHERE id=".$id;
-    if (mysqli_query($conn, $sql)) {
-        $id = mysqli_insert_id($conn);
-        $saved_comment = '<div class="comment_box">
-        <span class="delete" data-id="' . $id . '" >delete</span>
-        <span class="edit" data-id="' . $id . '">edit</span>
-        <div class="display_name">'. $name .'</div>
-        <div class="comment_text">'. $comment .'</div>
-    </div>';
-    echo $saved_comment;
-    }else {
-    echo "Error: ". mysqli_error($conn);
-    }
-    exit();
-}*/
-
 
 ?>

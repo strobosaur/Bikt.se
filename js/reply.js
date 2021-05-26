@@ -1,18 +1,18 @@
 // DELETE POST FROM DATABASE
-$('#form-delete-btn').submit(function(e){
+$('#form-reply-btn').submit(function(e){
     e.preventDefault();
 
     var id = $('#postID').val();
     $.ajax({
-        url: 'post_delete_ajax.php',
+        url: 'post_reply_process_ajax.php',
         type: 'POST',
         data: {
-            'post-delete': 1,
+            'post-reply': 1,
             'postID': id,
         },
         success: function(data){
             updatePostsAjax();
-            setBottomBarMessage("Post raderad");
+            setBottomBarMessage("Kommentar postad");
         }
     });
 });

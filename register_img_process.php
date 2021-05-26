@@ -28,10 +28,16 @@ if ((!isset($_POST['submit-img'])) || (!isset($_SESSION['userID'])))  {
         if (changeProfileImg($userID,$fileDestination)) {
             $_SESSION['userProfileImg'] = $fileDestination;
             header("location: profile.php?error=imgsuccess");
+            ?>
+            <script>setBottomBarMessage("Din profilbild har uppdaterats");</script>
+            <?php
             exit();
         } else {
             unlink($fileDestination);
             header("location: profile.php?error=imgfail");
+            ?>
+            <script>setBottomBarMessage("Något gick fel");</script>
+            <?php
             exit();
         }
     }

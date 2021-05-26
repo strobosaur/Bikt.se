@@ -17,6 +17,7 @@ $('#form-post').submit(function(e) {
             $('#file').val(null);
             $('#post-column').append(response);
             updatePostsAjax();
+            setBottomBarMessage("Din biktning har postats");
         }
     });
 });
