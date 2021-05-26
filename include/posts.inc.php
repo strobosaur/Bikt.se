@@ -126,32 +126,50 @@ function makePost($row){
             <div class="profile-field">
                 <img class="profile-img" id="profile-img" src="' . $userProfileImg . '" width="48px" height="48px">
                 <h4>' . $row['userName'] . '</h4>
-            </div>';
+            </div>
+
+            <div class="post-header" id="post-header" name="post-header">
+            <small>' . $dateTime . '</small>';
+
+            // SHOW MAIL ADRESS IF LOGGED IN
             if (isset($_SESSION['userID'])) {
                 $post .= '<a href="mailto:' . $row['userEmail'] . '">' . $row['userEmail'] . '</a>';
             }
             
-            $post .= '<p>' . $row['userPost'];
+            $post .= 
+            '</div>
+            <p>' . $row['userPost'];
 
             // INSERT IMAGE IF UPLOADED
             if ($row['postImage'] != null){
                 $post .= '<img src="' . $row['postImage'] . '">';
             }
 
+            // FOOTER CONTAINER
             $post .= '</p>
-            <small>' . $dateTime . '</small>';
+            <div class="post-footer" id="post-footer">';
 
-            // DISPLAY DELETE BUTTON IF POSTER LOGGED IN
-            if ((isset($_SESSION['userID'])) && ($_SESSION['userID'] == $row['userID'])){
-                $post .= 
-                '<form class="form-link-btn" id="form-delete-btn" name="form-delete-btn" action="post_delete.php" method="POST">
-                    <input type="hidden" value="' . $row['postID'] . '" id="postID" name="postID">
-                    <button class="link-btn" type="submit" name="post-delete" id="post-delete">Radera</button>
-                </form>';
-            }
+                // DISPLAY REPLY BUTTON IF USER LOGGED IN
+                if (isset($_SESSION['userID'])) {
+                    $post .= 
+                    '<form class="form-link-btn" id="form-reply-btn" name="form-reply-btn" action="post_reply.php" method="POST">
+                        <input type="hidden" value="' . $row['postID'] . '" id="postID" name="postID">
+                        <button class="link-btn" type="submit" name="post-reply" id="post-reply">Svara</button>
+                    </form>';
+                }
+
+                // DISPLAY DELETE BUTTON IF POSTER IS LOGGED IN
+                if((isset($_SESSION['userID'])) && ($_SESSION['userID'] == $row['userID'])){
+                    $post .=
+                    '<form class="form-link-btn" id="form-delete-btn" name="form-delete-btn" action="post_delete.php" method="POST">
+                        <input type="hidden" value="' . $row['postID'] . '" id="postID" name="postID">
+                        <button class="link-btn" type="submit" name="post-delete" id="post-delete">Radera</button>
+                    </form>';
+                }
 
             $post .= 
-        '</div>
+            '</div>
+        </div>
     </div>';
 
     return $post;

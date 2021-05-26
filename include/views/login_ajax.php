@@ -38,10 +38,6 @@ if(!isset($_POST['get_login'])) {
                 </div>
                 
                 <button type="submit" name="login" id="login">Login</button>
-                
-                <?php
-                    include_once "login_errors.php";
-                ?>
                                     
             </form>
         </div>
