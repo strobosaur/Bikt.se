@@ -25,6 +25,13 @@ function setSuccessFor(input) {
   formControl.className = 'form-control success';
 }
 
+function setBottomBarMessage(msg){
+  $("#footer-bar").empty();
+  //$("#btm-msg").append(
+    document.getElementById("footer-bar").innerHTML +=
+    "<div class='fade-out' id='fade-out'><p class='message' id='btm-msg'>" + msg + "</p></div>";
+}
+
 // FUNCTION CHECK POST INPUTS
 function checkPostInput() {
   const msgtext = document.getElementById('msgtext');

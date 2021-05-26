@@ -17,13 +17,13 @@ $('#form-login').submit(function(e){
             success: function(response){
                 if (response == true) {
                     getPostformAjax();
-                    $("#form-post").append("<p><br>Inloggningen lyckades</p>");
+                    setBottomBarMessage("Inloggningen lyckades")
 
                     getMenuAjax();
                     updatePostsAjax();
                 } else {
                     getLoginAjax();
-                    $("#form-login").append("<p><br>Inloggningen misslyckades</p>");
+                    setBottomBarMessage("Inloggningen misslyckades")
 
                     getMenuAjax();
                     updatePostsAjax();
