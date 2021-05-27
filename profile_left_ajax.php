@@ -1,10 +1,14 @@
 <?php
+session_start();
 
 // PROTECTION
 if(!isset($_POST['get_profile'])) {
     header("location: index.php");
     exit();
 } else {
+
+    require_once './include/login.inc.php';
+    require_once './include/posts.inc.php';
 
     $profileImg = fetchProfileImg($_SESSION['userID']);
     
