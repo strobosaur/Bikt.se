@@ -18,17 +18,10 @@ $('#form-login').submit(function(e){
                 if (response == true) {
                     getPostformAjax();
                     setBottomBarMessage("Inloggningen lyckades")
-
                     getMenuAjax();
                     updatePostsAjax();
-                    $.getScript("./js/scripts.js");
-                    $.getScript("./js/profile.js");
                 } else {
-                    //getLoginAjax();
                     setBottomBarMessage("Inloggningen misslyckades")
-
-                    //getMenuAjax();
-                    //updatePostsAjax();
                 }
             }
         })

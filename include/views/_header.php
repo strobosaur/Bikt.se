@@ -18,4 +18,6 @@
     <body>
         <nav id="nav-menu" name="nav-menu">
             <script>getMenuAjax();</script>
-        </nav>
+        </nav>        
+            <div class="message-bar" id="message-bar">
+            </div>

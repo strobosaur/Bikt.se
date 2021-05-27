@@ -26,11 +26,8 @@ function setSuccessFor(input) {
 }
 
 function setBottomBarMessage(msg){
-  $("#footer-bar").empty();
-  $("#footer-bar").append("<div class='fade-out' id='fade-out'><p class='message' id='btm-msg'>" + msg + "</p></div>");
-  //$("#btm-msg").append(
-    /*document.getElementById("footer-bar").innerHTML +=
-    "<div class='fade-out' id='fade-out'><p class='message' id='btm-msg'>" + msg + "</p></div>";*/
+  $("#message-bar").empty();
+  $("#message-bar").append("<div class='fade-out' id='fade-out'><p class='message' id='btm-msg'>" + msg + "</p></div>");
 }
 
 // FUNCTION CHECK POST INPUTS
@@ -192,4 +189,19 @@ function updatePostsAjax(){
           $.getScript("./js/delete_post.js");
       }
   });
+}
+
+// FUNCTION CLEAR UPDATES
+function stopUpdatePosts(){
+  clearInterval(intervalUpdatePosts);
+  //$("#update-posts").empty();
+}
+
+// FUNCTION START UPDATING POSTS
+function startUpdatePosts(){
+  /*$("#update-posts").empty();  
+  $("#update-posts").append("<script>$(document).ready(function(){updatePostsAjax();}); var intervalUpdatePosts = setInterval(updatePostsAjax, 2500);</script>");*/
+  
+  clearInterval(intervalUpdatePosts);
+  intervalUpdatePosts = setInterval(updatePostsAjax, 2500);
 }
