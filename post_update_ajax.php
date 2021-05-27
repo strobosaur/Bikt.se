@@ -21,7 +21,6 @@ if (!isset($_POST['update_posts'])){
     // APPEND EACH POST TO OUTPUT
     while ($row = $result->fetchArray()) {
         $posts .= makePost($row);
-        $posts .= '<script>$.getScript("./js/reply.js");</script>';
     }
 
     echo $posts;

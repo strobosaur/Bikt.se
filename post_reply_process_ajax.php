@@ -23,20 +23,16 @@ if (!isset($_POST["post-reply"]) || !isset($_SESSION["userID"])) {
 
     $stmt->bindParam(':postID', $postID, SQLITE3_INTEGER);
     $stmt->bindParam(':replierID', $replierID, SQLITE3_INTEGER);
-    $stmt->bindParam(':replyText', $userEmail, SQLITE3_TEXT);
+    $stmt->bindParam(':replyText', $replyText, SQLITE3_TEXT);
 
     // EXECUTE STATEMENT
     if ($stmt->execute()) {
         $db->close();
-
-        
-
-        $db->close();
-        echo $posted_comment;
+        echo true;
         exit();
     } else {
         $db->close();
-        echo "Error: ";
+        echo false;
         exit();
     }
 }

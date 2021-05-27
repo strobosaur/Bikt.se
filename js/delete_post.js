@@ -2,8 +2,7 @@
 $('.link-delete-btn').click(function(e){
     e.preventDefault();
     var cid = $(this).data('cid');
-
-    //var id = $('#postID').val();
+    
     $.ajax({
         url: 'post_delete_ajax.php',
         type: 'POST',

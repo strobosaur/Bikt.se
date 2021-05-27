@@ -9,6 +9,7 @@
     --container1: #677f7f;
     --container2: #7a8f8f;
     --text1: #c6cfcf;
+    --text2: white;
     --success: #2ecc71;
     --fail: #e74c3c;
 }
@@ -73,7 +74,7 @@ ul li a:hover {
     text-decoration: none;
     font-size: 14px;
     font-family: Arial, Helvetica, sans-serif;
-    color: var(--text1);
+    color: var(--text2);
     padding: 0;
 }
 
@@ -156,6 +157,7 @@ ul li a:hover {
 
 .profile-view-main .right-field {
     font-size: 14px;
+    color: var(--text2);
     width: 70%;
     padding-left: 10px;
     line-height: inherit;
