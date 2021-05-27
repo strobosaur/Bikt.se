@@ -248,6 +248,44 @@ ul li a:hover {
     padding: 0 16px
 }
 
+.postbox .link-reply-btn {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--text1);
+    padding: 0 16px;
+    margin: 0;
+    display: inline-block;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.postbox .link-reply-btn:hover {
+  color:white;
+  text-decoration: underline;
+}
+
+.postbox .link-delete-btn {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--text1);
+    padding: 0 16px;
+    margin: 0;
+    display: inline-block;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.postbox .link-delete-btn:hover {
+  color:white;
+  text-decoration: underline;
+}
+
 .postbox .post-footer .link-btn {
     border: none;
     outline: none;

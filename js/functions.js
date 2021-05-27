@@ -187,6 +187,7 @@ function updatePostsAjax(){
           $("#flex-container2").empty();
           $("#flex-container2").append(response);
           $.getScript("./js/delete_post.js");
+          $.getScript("./js/reply.js");
       }
   });
 }

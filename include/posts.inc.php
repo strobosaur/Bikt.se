@@ -172,20 +172,13 @@ function makePost($row){
                 // DISPLAY REPLY BUTTON IF USER LOGGED IN
                 if (isset($_SESSION['userID'])) {
                     $post .= 
-                    '<form class="form-link-btn" id="form-reply-btn" name="form-reply-btn" action="post_reply.php" method="POST">
-                        <input type="hidden" value="' . $row['postID'] . '" id="postID" name="postID">
-                        <input type="hidden" value="' . $row['userName'] . '" id="posterName" name="posterName">
-                        <button class="link-btn" type="submit" name="post-reply" id="post-reply">Svara</button>
-                    </form>';
+                    '<button class="link-reply-btn" type="submit" data-cid="'. $row['postID'] .'">Svara</button>';
                 }
 
                 // DISPLAY DELETE BUTTON IF POSTER IS LOGGED IN
                 if((isset($_SESSION['userID'])) && ($_SESSION['userID'] == $row['userID'])){
                     $post .=
-                    '<form class="form-link-btn" id="form-delete-btn" name="form-delete-btn" action="post_delete.php" method="POST">
-                        <input type="hidden" value="' . $row['postID'] . '" id="postID" name="postID">
-                        <button class="link-btn" type="submit" name="post-delete" id="post-delete">Radera</button>
-                    </form>';
+                    '<button class="link-delete-btn" type="submit" data-cid="'. $row['postID'] .'">Radera</button>';
                 }
 
             $post .= 
@@ -196,6 +189,7 @@ function makePost($row){
     return $post;
 }
 
+// FUNCTION MAKE REPLY
 function makeReply($postID,$userID){
     $replierData = userExists($userID);
     $replyData = replyExists($postID);

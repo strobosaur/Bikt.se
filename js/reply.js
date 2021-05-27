@@ -1,18 +1,26 @@
 // REPLY TO POST
-$('#form-reply-btn').submit(function(e){
+$('.link-reply-btn').click(function(e){
     e.preventDefault();
+    var cid = $(this).data('cid');
 
-    var id = $('#postID').val();
+    //var id = $('#postID').val();
+    //var pname = $('#posterName').val();
     $.ajax({
-        url: 'post_reply_process_ajax.php',
+        url: 'post_reply_ajax.php',
         type: 'POST',
+        dataType: 'json',
         data: {
-            'post-reply': 1,
-            'postID': id,
+            'get-reply': 1,
+            'postID': cid,
         },
-        success: function(data){
-            updatePostsAjax();
-            setBottomBarMessage("Kommentar postad");
+        success: function(response){
+            stopUpdatePosts();
+            $("#flex-container1").empty();
+            $("#flex-container1").append(response.replyform);
+            $("#flex-container2").empty();
+            $("#flex-container2").append(response.originalpost);
+            //updatePostsAjax();
+            //setBottomBarMessage("Kommentar postad");
         }
     });
 });
