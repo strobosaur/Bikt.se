@@ -6,7 +6,7 @@ if(!isset($_POST['get_menu'])){
     header("location: index.php");
     exit();
 } else {
-    $nav_menu =
+    $nav_menu = 
     '<ul>';
         if (isset($_SESSION['userID'])){
             $nav_menu .=

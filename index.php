@@ -2,34 +2,36 @@
     require_once './include/views/_header.php';
 ?>
 
-<!-- CREATE POST / LOGIN CONTAINER -->
-<div class="flex-container1" id="flex-container1">
+<div class="mid-column" id="mid-column">
+    <!-- CREATE POST / LOGIN CONTAINER -->
+    <div class="flex-container1" id="flex-container1">
 
-    <!-- FORM HANDLING -->
-    <?php
-        if(isset($_SESSION['userID'])) {
-            ?>
-            <script>
-                getPostformAjax();
-                $.getScript("./js/scripts.js");
-            </script>
-            <?php
-        } else {
-            ?>
-            <script>
-                getLoginAjax();
-                $.getScript("./js/scripts.js");
-                $.getScript("./js/reply.js");
-                $.getScript("./js/reply_view.js");
-            </script>
-            <?php
-        }
-    ?>
-</div>
+        <!-- FORM HANDLING -->
+        <?php
+            if(isset($_SESSION['userID'])) {
+                ?>
+                <script>
+                    getPostformAjax();
+                    $.getScript("./js/scripts.js");
+                </script>
+                <?php
+            } else {
+                ?>
+                <script>
+                    getLoginAjax();
+                    $.getScript("./js/scripts.js");
+                    $.getScript("./js/reply.js");
+                    $.getScript("./js/reply_view.js");
+                </script>
+                <?php
+            }
+        ?>
+    </div>
 
-<!-- POSTS CONTAINER -->
-<div class="flex-container2" id="flex-container2">
-    <div id="post-column">
+    <!-- POSTS CONTAINER -->
+    <div class="flex-container2" id="flex-container2">
+        <div id="post-column">
+        </div>
     </div>
 </div>
 

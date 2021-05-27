@@ -237,6 +237,11 @@ function makeReply($row){
 
     if($replierData === false){
         return false;
+    } else if (strlen($row['replyText']) < 5) {
+        ?>
+        <script>setBottomBarMessage("Kommentaren är för kort");
+        <?php
+        return false;
     } else {
 
         // GET REPLY DATA
