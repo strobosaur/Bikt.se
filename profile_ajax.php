@@ -60,8 +60,6 @@ if(!isset($_POST['get_profile']) || !isset($_SESSION['userID'])) {
             </form>
         </div>
     </div>';
-
-    //echo $profileLeft;
     
     // CREATE LOGIN FORM
     $profileRight =
@@ -122,7 +120,7 @@ if(!isset($_POST['get_profile']) || !isset($_SESSION['userID'])) {
         </div>
     </div>';
 
-    //echo $profileRight;
+    // CREATE RETURN ARRAY
     $returnArr = array("left"=>$profileLeft,"right"=>$profileRight);
     echo json_encode($returnArr);
 }

@@ -15,7 +15,7 @@ if (!isset($_POST['update_posts'])){
     $sql = "SELECT * FROM posts ORDER BY postID DESC";
     $result = $db->query($sql);
 
-    //$posts = '<div class="flex-container2">';
+    // MAKE POST LIST STRING
     $posts = '';
 
     // APPEND EACH POST TO OUTPUT

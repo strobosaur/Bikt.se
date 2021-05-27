@@ -51,6 +51,29 @@ function replyExists($postID)
     }
 }
 
+// FUNCTION COUNT POST REPLIES
+function countReplies($postID){
+    $db = new SQLite3("./db/labb1.db");
+    $sql = "SELECT COUNT(repID)
+            AS rep_count 
+            FROM replies
+            WHERE postID = :postID";
+
+    $stmt = $db->prepare($sql);
+
+    $stmt->bindParam(":postID", $postID, SQLITE3_INTEGER);
+    $count = $stmt->execute();
+
+    if($row = $count->fetchArray()){
+        $db->close();
+        return $row['rep_count'];
+    } else {
+        $db->close();
+        return false;
+    }
+
+}
+
 // FUNCTION DELETE POST
 function deletePost($postID) 
 {
@@ -139,6 +162,7 @@ function makePost($row){
     $userProfileImg = fetchProfileImg($row['userEmail']);
     $postDateTime = $row['postDateTime'];
     $dateTime = getDateFromDateTime($postDateTime) . " - " . getTimeFromDateTime($postDateTime);
+    $replies = countReplies($row['postID']);
 
     $post = 
     '<div class="container">
@@ -180,34 +204,59 @@ function makePost($row){
                     $post .=
                     '<button class="link-delete-btn" type="submit" data-cid="'. $row['postID'] .'">Radera</button>';
                 }
+                
+                // DISPLAY COMMENTS
+                if (isset($_SESSION['userID']) && $replies != false) {                    
+                    $post .= 
+                    '<button class="link-view-reply-btn" type="submit" data-cid="'. $row['postID'] .'">Kommentarer(' . $replies . ')</button>';
+                }
 
             $post .= 
-            '</div>
-        </div>
+            '</div>';
+
+                // DISPLAY REPLY BUTTON IF USER LOGGED IN
+                /*if (isset($_SESSION['userID']) && $replies != false) {                    
+                    $post .= 
+                    '<div class="post-footer2" id="post-footer2">
+                        <button class="link-view-reply-btn" type="submit" data-cid="'. $row['postID'] .'">Kommentarer(' . $replies . ')</button>
+                    </div>';
+                }*/
+
+            $post .= 
+        '</div>
     </div>';
 
     return $post;
 }
 
 // FUNCTION MAKE REPLY
-function makeReply($postID,$userID){
-    $replierData = userExists($userID);
-    $replyData = replyExists($postID);
+function makeReply($row){
 
-    if(($replierData === false) || ($replyData === false)){
+    // GET REPLIER DATA
+    $replierData = userExists($row['replierID']);
+
+    if($replierData === false){
         return false;
     } else {
 
+        // GET REPLY DATA
+        $replierID = $replierData['userID'];
+        $replierName = $replierData['nname'];
+        $replierEmail = $replierData['email'];
+        $replyID = $row['repID'];
+        $replyText = $row['replyText'];
+        $replyDateTime = $row['replyDateTime'];
+
         // GET REPLY DATE & TIME
-        $dateTime = getDateFromDateTime($replyData['replyDateTime']) . " - " . getTimeFromDateTime($replyData['replyDateTime']);
-        $userProfileImg = $replierData['profileImg'];
+        $dateTime = getDateFromDateTime($replyDateTime) . " - " . getTimeFromDateTime($replyDateTime);
+        $userProfileImg = fetchProfileImg($replierID);
 
         $reply = 
         '<div class="container">
-            <div class="replybox">
+            <div class="postbox">
                 <div class="profile-field">
                     <img class="profile-img" id="profile-img" src="' . $userProfileImg . '" width="48px" height="48px">
-                    <h4>' . $replierData['userName'] . '</h4>
+                    <h4>' . $replierName . '</h4>
                 </div>
     
                 <div class="post-header" id="post-header" name="post-header">
@@ -215,25 +264,22 @@ function makeReply($postID,$userID){
     
                 // SHOW MAIL ADRESS IF LOGGED IN
                 if (isset($_SESSION['userID'])) {
-                    $reply .= '<a href="mailto:' . $replierData['userEmail'] . '">' . $replierData['userEmail'] . '</a>';
+                    $reply .= '<a href="mailto:' . $replierEmail . '">' . $replierEmail . '</a>';
                 }
                 
                 $reply .= 
                 '</div>
-                <p>' . $replyData['replyText'];
+                <p>' . $replyText;
     
                 // FOOTER CONTAINER
                 $reply .= '</p>
                 <div class="post-footer" id="post-footer">';
-    
-                    // DISPLAY DELETE BUTTON IF POSTER IS LOGGED IN
-                    if((isset($_SESSION['userID'])) && ($_SESSION['userID'] == $replierData['userID'])){
-                        $reply .=
-                        '<form class="form-link-btn" id="form-delete-reply-btn" name="form-delete-reply-btn" action="reply_delete.php" method="POST">
-                            <input type="hidden" value="' . $replyData['repID'] . '" id="replyID" name="replyID">
-                            <button class="link-btn" type="submit" name="reply-delete" id="reply-delete">Radera</button>
-                        </form>';
-                    }
+
+                // DISPLAY DELETE BUTTON IF POSTER IS LOGGED IN
+                if((isset($_SESSION['userID'])) && ($_SESSION['userID'] == $replierID)){
+                    $reply .=
+                    '<button class="link-delete-reply-btn" type="submit" data-cid="'. $replyID .'">Radera</button>';
+                }
     
                 $reply .= 
                 '</div>

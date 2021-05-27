@@ -208,7 +208,7 @@ ul li a:hover {
 
 .postbox a {
     color: inherit;
-    padding: 0 16px;
+    padding: 0;
     margin: 0;
     display: inline-block;
     font-size: 12px;
@@ -222,7 +222,7 @@ ul li a:hover {
 
 .postbox .post-header {
     width: 100%;
-    padding: 0 24px;
+    padding: 0 32px;
     height: 32px;
     display: flex;
     flex-flow: row;
@@ -240,9 +240,17 @@ ul li a:hover {
     align-items: center;
 }
 
+.postbox .post-footer2 {
+    width: 100%;
+    padding: 0 24px;
+    height: 24px;
+    display: block;
+    align-items: center;
+}
+
 .postbox small{
     font-size: 12px;
-    padding: 0 16px;
+    padding: 0;
 }
 
 .postbox .form-link-btn {
@@ -284,6 +292,25 @@ ul li a:hover {
 }
 
 .postbox .link-delete-btn:hover {
+  color:white;
+  text-decoration: underline;
+}
+
+.postbox .link-view-reply-btn {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+    color: var(--text1);
+    padding: 0 16px;
+    margin: 0;
+    display: inline-block;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.postbox .link-view-reply-btn:hover {
   color:white;
   text-decoration: underline;
 }
