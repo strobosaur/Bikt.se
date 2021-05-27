@@ -188,6 +188,7 @@ function updatePostsAjax(){
           $("#flex-container2").append(response);
           $.getScript("./js/delete_post.js");
           $.getScript("./js/reply.js");
+          $.getScript("./js/reply_view.js");
       }
   });
 }
@@ -195,14 +196,10 @@ function updatePostsAjax(){
 // FUNCTION CLEAR UPDATES
 function stopUpdatePosts(){
   clearInterval(intervalUpdatePosts);
-  //$("#update-posts").empty();
 }
 
 // FUNCTION START UPDATING POSTS
 function startUpdatePosts(){
-  /*$("#update-posts").empty();  
-  $("#update-posts").append("<script>$(document).ready(function(){updatePostsAjax();}); var intervalUpdatePosts = setInterval(updatePostsAjax, 2500);</script>");*/
-  
   clearInterval(intervalUpdatePosts);
   intervalUpdatePosts = setInterval(updatePostsAjax, 2500);
 }

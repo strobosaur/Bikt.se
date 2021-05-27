@@ -12,7 +12,6 @@
             <script>
                 getPostformAjax();
                 $.getScript("./js/scripts.js");
-                $.getScript("./js/reply.js");
             </script>
             <?php
         } else {
@@ -21,6 +20,7 @@
                 getLoginAjax();
                 $.getScript("./js/scripts.js");
                 $.getScript("./js/reply.js");
+                $.getScript("./js/reply_view.js");
             </script>
             <?php
         }
