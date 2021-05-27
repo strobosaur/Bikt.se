@@ -26,7 +26,15 @@ if(!isset($_POST['view-reply']) || !isset($_SESSION['userID'])) {
     $result = $stmt->execute();
 
     // LOOP THROUGH ARRAY
-    $replies = '';
+    $replies = 
+        '<div class="container">
+            <div class="postbox">
+                <div class="profile-field">
+                    <h2>Kommentarer</h2>
+                </div>
+            </div>
+        </div>';
+        
     while($row = $result->fetchArray()) {
         $replies .= makeReply($row);
     }

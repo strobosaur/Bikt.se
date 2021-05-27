@@ -12,14 +12,11 @@ $('.link-view-reply-btn').click(function(e){
             'postID': cid,
         },
         success: function(response){
-            console.log(response.one);
-            console.log(response.two);
             stopUpdatePosts();
             $("#flex-container1").empty();
             $("#flex-container1").append(response.one);
             $("#flex-container2").empty();
             $("#flex-container2").append(response.two);
-            //$.getScript("./js/reply_process.js");
         }
     });
 });
