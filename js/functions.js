@@ -27,9 +27,10 @@ function setSuccessFor(input) {
 
 function setBottomBarMessage(msg){
   $("#footer-bar").empty();
+  $("#footer-bar").append("<div class='fade-out' id='fade-out'><p class='message' id='btm-msg'>" + msg + "</p></div>");
   //$("#btm-msg").append(
-    document.getElementById("footer-bar").innerHTML +=
-    "<div class='fade-out' id='fade-out'><p class='message' id='btm-msg'>" + msg + "</p></div>";
+    /*document.getElementById("footer-bar").innerHTML +=
+    "<div class='fade-out' id='fade-out'><p class='message' id='btm-msg'>" + msg + "</p></div>";*/
 }
 
 // FUNCTION CHECK POST INPUTS
@@ -128,6 +129,7 @@ function checkRegInput() {
   }
 
   if (isOk == false){
+    setBottomBarMessage("Registreringen misslyckades");
     if (event.preventDefault){
       event.preventDefault();
     } else {

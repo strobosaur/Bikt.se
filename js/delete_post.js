@@ -10,7 +10,7 @@ $('#form-delete-btn').submit(function(e){
             'post-delete': 1,
             'postID': id,
         },
-        success: function(data){
+        success: function(){
             updatePostsAjax();
             setBottomBarMessage("Post raderad");
         }

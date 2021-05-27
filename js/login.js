@@ -1,11 +1,11 @@
 // LOGIN HANDLING
 $('#form-login').submit(function(e){
-    e.preventDefault();
-
-    var uname = $("#login_email").val();
-    var pwd = $("#login_password").val();
-
     if (checkLoginInput()){
+        e.preventDefault();
+
+        var uname = $("#login_email").val();
+        var pwd = $("#login_password").val();
+
         $.ajax({
             url: 'login_process.php',
             type: 'POST',
@@ -21,12 +21,13 @@ $('#form-login').submit(function(e){
 
                     getMenuAjax();
                     updatePostsAjax();
+                    $.getScript("./js/scripts.js");
                 } else {
-                    getLoginAjax();
+                    //getLoginAjax();
                     setBottomBarMessage("Inloggningen misslyckades")
 
-                    getMenuAjax();
-                    updatePostsAjax();
+                    //getMenuAjax();
+                    //updatePostsAjax();
                 }
             }
         })

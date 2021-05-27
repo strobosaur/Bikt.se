@@ -249,6 +249,14 @@ function loginUser($userID, $password){
     }    
 }
 
+//FUNCTION LOG OUT USER
+function logoutUser(){
+    session_start();
+    session_unset();
+    session_destroy();
+    return true;
+}
+
 // FUNCTION UPLOAD PROFILE IMAGE
 function uploadProfileImg($userID,$fileName,$fileTmpName,$fileError) {
 

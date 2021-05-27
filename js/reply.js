@@ -1,4 +1,4 @@
-// DELETE POST FROM DATABASE
+// REPLY TO POST
 $('#form-reply-btn').submit(function(e){
     e.preventDefault();
 
