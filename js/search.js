@@ -12,10 +12,11 @@ $('#form-search').submit(function(e) {
             'search_text': keyword,
         },
         success: function(response){
-            clearInterval(postUpdate);
+            stopUpdatePosts();
+            //clearInterval(intervalUpdatePosts);
             $('#search_text').val('');
-            $("#post-column").empty();
-            $('#post-column').append(response);
+            $("#flex-container2").empty();
+            $("#flex-container2").append(response);
         }
     });
 });

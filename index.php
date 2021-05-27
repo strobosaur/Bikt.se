@@ -31,12 +31,14 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function(){
-        updatePostsAjax();
-    });
-    //var postUpdate = setInterval(updatePostsAjax, 2500);
-</script>
+<div id="update-posts">
+    <script>
+        $(document).ready(function(){
+            updatePostsAjax();
+        });
+        var intervalUpdatePosts = setInterval(updatePostsAjax, 2500);
+    </script>
+</div>
 
 <?php
     require_once './include/views/_footer.php';

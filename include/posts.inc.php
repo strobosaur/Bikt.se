@@ -57,8 +57,7 @@ function deletePost($postID)
     $result = postExists($postID);
     
     if ($result === false) {
-        header("location: index.php?error=postnotfound");
-        exit();
+        return false;
     } else {
         // DELETE IMAGE
         if ($result['postImage'] != null) {
@@ -74,13 +73,11 @@ function deletePost($postID)
 
         // EXECUTE QUERY
         if ($stmt->execute()) {
-            header("location: index.php");
             $db->close();
-            exit();
+            return false;
         } else {
-            header("location: index.php");
             $db->close();
-            exit();
+            return false;
         }
     }
 }
@@ -88,10 +85,13 @@ function deletePost($postID)
 // FUNCTION UPLOAD IMAGE
 function uploadImg($fileName,$fileTmpName,$fileError) {
 
+    // GET FILE EXTENSION
     $fileExt = end(explode('.', strtolower($fileName)));
 
+    // ALLOWED FILE EXTENSIONS
     $allowedExtArr = array('jpg', 'jpeg', 'png');
 
+    // UPLOADED FILE EXTENSION IS ALLOWED
     if (in_array($fileExt, $allowedExtArr)) {
         if ($fileError === 0) {
             $fileNameNew = date("Ymd_His_") . uniqid('',true) . "." . $fileExt;
@@ -126,6 +126,7 @@ function searchPosts($search){
             $posts .= makePost($row);
         }
     } else {
+        $db->close();
         return false;
     }
 
@@ -199,7 +200,9 @@ function makeReply($postID,$userID){
     $replierData = userExists($userID);
     $replyData = replyExists($postID);
 
-    if(($replierData !== false) && ($replyData !== false)){
+    if(($replierData === false) || ($replyData === false)){
+        return false;
+    } else {
 
         // GET REPLY DATE & TIME
         $dateTime = getDateFromDateTime($replyData['replyDateTime']) . " - " . getTimeFromDateTime($replyData['replyDateTime']);

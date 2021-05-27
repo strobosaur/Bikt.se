@@ -79,29 +79,21 @@ function registerUserToDB($userFname,$userLname,$userNname,$userEmail,$password1
 
     // INPUT VALIDATION
     if (strlen($userFnameValue) < 2) {        
-        header("location: ./registration.php?error=fnameshort");
-        exit();
-    } else if (strlen($userLnameValue) < 2) {        
-        header("location: ./registration.php?error=lnameshort");
-        exit();
-    } else if (strlen($userNnameValue) < 2) {        
-        header("location: ./registration.php?error=nnameshort");
-        exit();
-    } else if (strlen($password1) < 8) {        
-        header("location: ./registration.php?error=passwordshort");
-        exit();
-    } else if ($password1 !== $password2) {        
-        header("location: ./registration.php?error=passwordmissmatch");
-        exit();
+        return false;
+    } else if (strlen($userLnameValue) < 2) {
+        return false;
+    } else if (strlen($userNnameValue) < 2) {
+        return false;
+    } else if (strlen($password1) < 8) {
+        return false;
+    } else if ($password1 !== $password2) {
+        return false;
     } else if (!isEmail($userEmailValue)) {
-        header("location: ./registration.php?error=invaliemail");
-        exit();
-    } else if (userExists($userEmailValue) !== false){
-        header("location: ./registration.php?error=useremailtaken");
-        exit();
+        return false;
+    } else if (userExists($userEmailValue)){
+        return false;
     } else if (userExists($userNnameValue) !== false){
-        header("location: ./registration.php?error=usernametaken");
-        exit();
+        return false;
     } else {
 
         //OPEN DATABASE
@@ -148,29 +140,23 @@ function updateUserProfile($userID,$userFname,$userLname,$userNname,$userEmail,$
     $userEmailValue = trim($userEmail);
 
     // INPUT VALIDATION
-    if (strlen($userFnameValue) < 2) {        
-        header("location: profile.php?error=fnameshort");
-        exit();
-    } else if (strlen($userLnameValue) < 2) {        
-        header("location: profile.php?error=lnameshort");
-        exit();
-    } else if (strlen($userNnameValue) < 2) {        
-        header("location: profile.php?error=nnameshort");
-        exit();
-    } else if (strlen($password1) < 8) {        
-        header("location: profile.php?error=pwdshort");
-        exit();
+    if (strlen($userFnameValue) < 2) {
+        return false;
+    } else if (strlen($userLnameValue) < 2) {
+        return false;
+    } else if (strlen($userNnameValue) < 2) {
+        return false;
+    } else if (strlen($password1) < 8) {
+        return false;
     } else if (!isEmail($userEmailValue)) {
-        header("location: profile.php?error=invalidemail");
-        exit(); 
+        return false;
     }
     
     // CHECK FOR EMAIL TAKEN
     $result = userExists($userEmailValue);
     if ($result !== false) {
         if ($result['userID'] != $userID) {
-            header("location: profile.php?error=emailtaken");
-            exit();
+            return false;
         } 
     }
     
@@ -178,8 +164,7 @@ function updateUserProfile($userID,$userFname,$userLname,$userNname,$userEmail,$
     $result = userExists($userNnameValue);
     if ($result !== false) {
         if ($result['userID'] != $userID) {
-            header("location: profile.php?error=nnametaken");
-            exit();
+            return false;
         } 
     }
 
@@ -244,8 +229,6 @@ function loginUser($userID, $password){
         $_SESSION["userProfileImg"] = $userData['profileImg'];
         $_SESSION["loggedIn"] = true;
 
-        /*header("location: ./index.php?error=loggedin");
-        exit();*/
         return true;
     }    
 }

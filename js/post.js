@@ -12,7 +12,6 @@ $('#form-post').submit(function(e) {
         contentType: false,
         processData: false,
         success: function(response){
-            //console.log(response);
             $('#msgtext').val('');
             $('#file').val(null);
             $('#post-column').append(response);

@@ -88,71 +88,9 @@ function getMenuAjax(){
         success: function(response){
             $("#nav-menu").empty();
             $("#nav-menu").append(response);
-            $.getScript("./js/scripts.js");
+            $.getScript("./js/nav_menu.js");
             $.getScript("./js/profile.js");
         }
     });
 }
 
-// FUNCTION GET MENU
-/*function getProfileAjax(){
-    $.ajax({
-        url: './include/views/profile_ajax.php',
-        type: 'POST',
-        data: {
-            'get_profile': 1,
-        },
-        success: function(response){
-            $("#nav-menu").empty();
-            $("#nav-menu").append(response);
-            $.getScript("./js/scripts.js");
-            $.getScript("./js/profile.js");
-        }
-    });
-}*/
-
-// WAIT FOR DOCUMENT LOAD
-$(document).ready(function(){
-
-    // NAVIGATION MENU REGISTER
-    $('#menu_register').click(function(e) {
-        e.preventDefault();
-        getRegisterAjax();
-        $.getScript("./js/scripts.js");
-    })
-
-    // NAVIGATION MENU LOGIN
-    $('#menu_login').click(function(e) {
-        e.preventDefault();
-        getLoginAjax();
-        $.getScript("./js/scripts.js");
-    })
-
-    // NAVIGATION MENU SEARCH
-    $('#menu_search').click(function(e) {
-        e.preventDefault();
-        getSearchAjax();
-        $.getScript("./js/scripts.js");
-    })
-
-    // NAVIGATION MENU LOGOUT
-    $('#menu_logout').click(function(e) {
-        e.preventDefault();
-        $.post("logout_process.php", function(){
-            location.href = "index.php";
-            getMenuAjax();
-            updatePostsAjax();
-            setBottomBarMessage("Du är nu utloggad")
-            $.getScript("./js/scripts.js");
-            $.getScript("./js/login.js");
-        })
-    })
-
-    // NAVIGATION MENU LOGIN
-    /*$('#menu_home').click(function(e) {
-        e.preventDefault();
-        getPostformAjax();
-        $.getScript("./js/scripts.js");
-    })*/
-    
-});

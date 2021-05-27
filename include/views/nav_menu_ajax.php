@@ -20,7 +20,6 @@ if(!isset($_POST['get_menu'])){
             <li><a id="menu_register" href="register.php">Register</a></li>';
         }
 
-
     $nav_menu .=
     '</ul>';
 
