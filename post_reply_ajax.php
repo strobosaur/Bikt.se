@@ -46,8 +46,6 @@ if(!isset($_POST['get-reply']) || !isset($_SESSION['userID'])) {
         </div>
     </div>';
 
-    //echo $replyForm;
-
     $originalPost = makePost(postExists($_POST['postID']));
 
     $returnArr = array("replyform"=>$replyForm,"originalpost"=>$originalPost);

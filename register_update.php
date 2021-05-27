@@ -8,24 +8,21 @@ if (!isset($_POST['update']) || !isset($_SESSION['userID'])) {
 } else {
 
     require_once './include/login.inc.php';    
-
-    /*var_dump($_SESSION['userEmail']);
-    var_dump($_POST['password0']);
-    exit();*/
+    
     // CHECK PASSWORD INPUT
     if (passwordMatchesDB($_SESSION['userEmail'], $_POST['password0']) === false) {
-        header("location: profile.php?error=wrongpwd");
+        header("location: Location: index.php");
         exit();
     }
     
     if (updateUserProfile($_SESSION['userID'], $_POST['fname'], $_POST['lname'], $_POST['nname'], $_POST['email'], $_POST['password1'], $_POST['password2'])){
-        header("Location: profile.php?error=none");
+        header("Location: index.php");
         ?>
         <script>setBottomBarMessage("Din profil har uppdaterats");</script>
         <?php
         exit();
     } else {
-        header("Location: profile.php?error=invalidinput");
+        header("Location: Location: index.php");
         ?>
         <script>setBottomBarMessage("Något gick fel");</script>
         <?php
