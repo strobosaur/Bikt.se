@@ -2,10 +2,15 @@
 session_start();
 
 // PROTECTION
-if(!isset($_POST['get_reply']) || !isset($_SESSION['userID'])) {
+if(!isset($_POST['get-reply']) || !isset($_SESSION['userID'])) {
     header("location: index.php");
     exit();
 } else {
+
+    require_once './include/login.inc.php';
+    require_once './include/posts.inc.php';
+    $postData = postExists($_POST['postID']);
+    $posterData = userExists($postData['userID']);
     
     // CREATE REPLY FORM
     $replyForm =
@@ -21,14 +26,14 @@ if(!isset($_POST['get_reply']) || !isset($_SESSION['userID'])) {
             </div>
 
             <div class="header">
-                <h4>Kommentera på '. $_POST['posterName'] .'"´s post</h4>    
+                <h4>Kommentera på '. $posterData['nname'] .'´s post</h4>    
             </div>
 
             <form class="form" id="form-reply" name="form-reply" onsubmit="checkReplyInput();" action="" method="POST">
                                                   
                 <div class="form-control">
                 <label>Kommentar</label>
-                <textarea placeholder="Bikta din synd" name="msgtext" id="msgtext" maxlength="500"></textarea>
+                <textarea placeholder="kommentar..." name="msgtext" id="msgtext" maxlength="500"></textarea>
                 <small>Error message</small>
                 </div>
                 
@@ -41,6 +46,11 @@ if(!isset($_POST['get_reply']) || !isset($_SESSION['userID'])) {
         </div>
     </div>';
 
-    echo $replyForm;
+    //echo $replyForm;
+
+    $originalPost = makePost(postExists($_POST['postID']));
+
+    $returnArr = array("replyform"=>$replyForm,"originalpost"=>$originalPost);
+    echo json_encode($returnArr);
 }
 ?>
