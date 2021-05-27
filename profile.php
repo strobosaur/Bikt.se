@@ -48,22 +48,22 @@
             </div>
 
             <div class="header">
-                <h4>Ändra profilbild?</h4>    
+                <h4>Ändra profilbild</h4>    
             </div>
             
             <form class="form" id="form" action="register_img_process.php" method="POST" enctype="multipart/form-data">
     
-            <div class="form-control">
-            <input class="custom-file-upload" type="file" name="file">
-            <small>Error message</small>
-            </div>
+                <div class="form-control">
+                <input class="custom-file-upload" type="file" name="file">
+                <small>Error message</small>
+                </div>
     
-            <button type="submit" name="submit-img" id="submit-img">Ladda upp</button>
+                <button type="submit" name="submit-img" id="submit-img">Ladda upp</button>
 
             </form>
 
             <div class="header">
-                <h4>Ändra profiluppgifter?</h4>    
+                <h4>Ändra profiluppgifter</h4>    
             </div>
 
             <form class="form" id="form" onsubmit="checkRegInput();" action="register_update.php" method="POST">

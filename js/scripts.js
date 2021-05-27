@@ -137,13 +137,6 @@ $(document).ready(function(){
         $.getScript("./js/scripts.js");
     })
 
-    // NAVIGATION MENU LOGIN
-    /*$('#menu_home').click(function(e) {
-        e.preventDefault();
-        getPostformAjax();
-        $.getScript("./js/scripts.js");
-    })*/
-
     // NAVIGATION MENU LOGOUT
     $('#menu_logout').click(function(e) {
         e.preventDefault();
@@ -151,8 +144,17 @@ $(document).ready(function(){
             location.href = "index.php";
             getMenuAjax();
             updatePostsAjax();
+            setBottomBarMessage("Du är nu utloggad")
             $.getScript("./js/scripts.js");
             $.getScript("./js/login.js");
         })
     })
+
+    // NAVIGATION MENU LOGIN
+    /*$('#menu_home').click(function(e) {
+        e.preventDefault();
+        getPostformAjax();
+        $.getScript("./js/scripts.js");
+    })*/
+    
 });
