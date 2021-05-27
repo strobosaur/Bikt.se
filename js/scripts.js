@@ -71,6 +71,8 @@ function getSearchAjax(){
         success: function(response){
             $("#flex-container1").empty();
             $("#flex-container1").append(response);
+            updatePostsAjax();
+            $.getScript("./js/search.js");
         }
     });
 }
@@ -87,34 +89,30 @@ function getMenuAjax(){
             $("#nav-menu").empty();
             $("#nav-menu").append(response);
             $.getScript("./js/scripts.js");
+            $.getScript("./js/profile.js");
         }
     });
 }
 
+// FUNCTION GET MENU
+/*function getProfileAjax(){
+    $.ajax({
+        url: './include/views/profile_ajax.php',
+        type: 'POST',
+        data: {
+            'get_profile': 1,
+        },
+        success: function(response){
+            $("#nav-menu").empty();
+            $("#nav-menu").append(response);
+            $.getScript("./js/scripts.js");
+            $.getScript("./js/profile.js");
+        }
+    });
+}*/
+
 // WAIT FOR DOCUMENT LOAD
 $(document).ready(function(){
-
-    // SEARCH POST IN DATABASE
-    $('#form-search').submit(function(e) {
-        e.preventDefault();
-
-        var keyword = $('#search_text').val();
-
-        $.ajax({
-            url: 'search_process_ajax.php',
-            type: 'POST',
-            data: {
-                'search': 1,
-                'search_text': keyword,
-            },
-            success: function(response){
-                clearInterval(postUpdate);
-                $('#search_text').val('');
-                $("#post-column").empty();
-                $('#post-column').append(response);
-            }
-        });
-    });
 
     // NAVIGATION MENU REGISTER
     $('#menu_register').click(function(e) {

@@ -187,8 +187,8 @@ function updatePostsAjax(){
           'update_posts': 1,
       },
       success: function(response){
-          $("#post-column").empty();
-          $("#post-column").append(response);
+          $("#flex-container2").empty();
+          $("#flex-container2").append(response);
           $.getScript("./js/delete_post.js");
       }
   });

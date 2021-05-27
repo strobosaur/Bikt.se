@@ -35,7 +35,7 @@
     $(document).ready(function(){
         updatePostsAjax();
     });
-    var postUpdate = setInterval(updatePostsAjax, 2500);
+    //var postUpdate = setInterval(updatePostsAjax, 2500);
 </script>
 
 <?php

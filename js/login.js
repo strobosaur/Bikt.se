@@ -22,6 +22,7 @@ $('#form-login').submit(function(e){
                     getMenuAjax();
                     updatePostsAjax();
                     $.getScript("./js/scripts.js");
+                    $.getScript("./js/profile.js");
                 } else {
                     //getLoginAjax();
                     setBottomBarMessage("Inloggningen misslyckades")

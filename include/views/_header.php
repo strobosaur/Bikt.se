@@ -17,17 +17,5 @@
 
     <body>
         <nav id="nav-menu" name="nav-menu">
-            <ul>
-                <?php
-                if (isset($_SESSION['userID'])){
-                    echo '<li><a id="menu_home" href="index.php">Home</a></li>';
-                    echo '<li><a id="menu_profile" href="profile.php">' . $_SESSION['userNname'] . '</a></li>';
-                    echo '<li><a id="menu_search" href="search.php">Sök</a></li>';
-                    echo '<li><a id="menu_logout" href="logout_process.php">Log out</a></li>';
-                } else {
-                    echo '<li><a id="menu_login" href="index.php">Login</a></li>';
-                    echo '<li><a id="menu_register" href="register.php">Register</a></li>';
-                }
-                ?>
-            </ul>
+            <script>getMenuAjax();</script>
         </nav>

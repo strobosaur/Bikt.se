@@ -12,6 +12,7 @@ function isEmail($email) {
     }
 }
 
+// INPUT PASSWORD IS THE RIGHT ONE / VERIFY
 function passwordMatchesDB($userID, $password) {
     $userData = userExists($userID);
 
