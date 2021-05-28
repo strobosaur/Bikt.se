@@ -175,6 +175,32 @@ function checkLoginInput() {
   return isOk;
 }
 
+// FUNCTION CHECK LOGIN INPUTS
+function checkReplyInput() {
+  const replyText = document.getElementById('msgtext');
+  const replyTextVal = replyText.value.trim();
+
+  var isOk = new Boolean(1);
+  
+  // CHECK EMAIL
+  if (strlen(replyTextVal) < 5) {
+    setErrorFor(replyText, 'Svaret är för kort');
+    isOk = new Boolean(0);
+  } else {
+    setSuccessFor(replyText);
+  }
+
+  if (isOk == false){
+    if (event.preventDefault){
+      event.preventDefault();
+    } else {
+      event.returnValue = false;
+    }
+  }
+
+  return isOk;
+}
+
 // FUNCTION UPDATE POSTS
 function updatePostsAjax(){
   $.ajax({
