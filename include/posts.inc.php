@@ -33,13 +33,13 @@ function postExists($postID)
 }
 
 // FUNCTION CHECK IF POST EXISTS
-function replyExists($postID)
+function replyExists($replyID)
 {
     $db = new SQLite3("./db/labb1.db");
-    $sql = "SELECT * FROM replies WHERE postID = :postID";
+    $sql = "SELECT * FROM replies WHERE repID = :repID";
 
     $stmt = $db->prepare($sql);
-    $stmt->bindValue(':postID', $postID, SQLITE3_INTEGER);
+    $stmt->bindValue(':repID', $replyID, SQLITE3_INTEGER);
     $result = $stmt->execute();
 
     if($row = $result->fetchArray()){
@@ -97,7 +97,7 @@ function deletePost($postID)
         // EXECUTE QUERY
         if ($stmt->execute()) {
             $db->close();
-            return false;
+            return true;
         } else {
             $db->close();
             return false;
@@ -292,6 +292,33 @@ function makeReply($row){
         </div>';
     
         return $reply;
+    }
+}
+
+// FUNCTION DELETE REPLY
+function deleteReply($replyID) 
+{
+    $result = replyExists($replyID);
+    
+    if ($result === false) {
+        return false;
+    } else {
+
+        // PREPARE DB QUERY
+        $db = new SQLite3("./db/labb1.db");
+        $sql = "DELETE FROM 'replies' WHERE repID = :repID";
+
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':repID', $replyID, SQLITE3_INTEGER);
+
+        // EXECUTE QUERY
+        if ($stmt->execute()) {
+            $db->close();
+            return $result['postID'];
+        } else {
+            $db->close();
+            return false;
+        }
     }
 }
 
