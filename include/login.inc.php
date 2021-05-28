@@ -304,7 +304,7 @@ function fetchProfileImg($userID) {
         if ($result['profileImg'] != null) {
             return $result['profileImg'];
         } else {
-            return "./img/default_profile_img.php";
+            return "./img/default_profile_img.png";
         }
     } else {
         return false;
