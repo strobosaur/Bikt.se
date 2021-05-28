@@ -193,6 +193,24 @@ function updatePostsAjax(){
   });
 }
 
+// FUNCTION UPDATE POSTS
+function updateRepliesAjax(postID){
+  $.ajax({
+      url: 'post_reply_view_ajax.php',
+      type: 'POST',
+      dataType: 'json',
+      data: {
+          'view-reply': 1,
+          'postID': postID,
+      },
+      success: function(response){
+          $("#flex-container2").empty();
+          $("#flex-container2").append(response.two);
+          $.getScript("./js/reply_delete.js");
+      }
+  });
+}
+
 // FUNCTION CLEAR UPDATES
 function stopUpdatePosts(){
   clearInterval(intervalUpdatePosts);

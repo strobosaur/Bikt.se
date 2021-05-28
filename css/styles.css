@@ -28,7 +28,6 @@ body {
   display: flex;
   justify-content: center;
   flex-flow: row;
-  align-self: center;
 }
 
 nav {
@@ -106,6 +105,7 @@ ul li a:hover {
     margin: 0 auto 0 390px;
     width: calc(100% - 382px);
     min-width: 352px;
+    padding-bottom: 24px;
 }
 
 .container {

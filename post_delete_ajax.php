@@ -2,14 +2,13 @@
 
 // DELETE POST
 if (!isset($_POST['post-delete'])) {
-    header("location: index.php");
-    exit();
+    echo false;
 } else {
-    
+
     require_once './include/posts.inc.php';
     deletePost($_POST['postID']);
 
-    exit();
+    echo true;
 }
 
 ?>

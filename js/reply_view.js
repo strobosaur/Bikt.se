@@ -17,6 +17,7 @@ $('.link-view-reply-btn').click(function(e){
             $("#flex-container1").append(response.one);
             $("#flex-container2").empty();
             $("#flex-container2").append(response.two);
+            $.getScript("./js/reply_delete.js");
         }
     });
 });
