@@ -35,6 +35,10 @@
     </div>
 </div>
 
+<?php
+    include 'message_handling.php';
+?>
+
 <div id="update-posts">
     <script>
         $(document).ready(function(){
