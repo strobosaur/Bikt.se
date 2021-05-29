@@ -183,7 +183,7 @@ function checkReplyInput() {
     var isOk = new Boolean(1);
     
     // CHECK EMAIL
-    if (strlen(replyTextVal) < 5) {
+    if (replyTextVal.length < 5) {
         setErrorFor(replyText, 'Svaret är för kort');
         isOk = new Boolean(0);
     } else {
