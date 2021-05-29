@@ -30,8 +30,6 @@
 
     <!-- POSTS CONTAINER -->
     <div class="flex-container2" id="flex-container2">
-        <div id="post-column">
-        </div>
     </div>
 </div>
 

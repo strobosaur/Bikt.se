@@ -12,7 +12,7 @@ if (!isset($_POST['submit'])) {
         header("location: index.php?error=regsuccess");
         exit();
     } else {
-        header("location: index.php=regfailed");
+        header("location: index.php?error=regfailed");
         exit();
     }
 }
