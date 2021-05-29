@@ -12,11 +12,15 @@ $('#form-post').submit(function(e) {
         contentType: false,
         processData: false,
         success: function(response){
-            $('#msgtext').val('');
-            $('#file').val(null);
-            $('#post-column').append(response);
-            updatePostsAjax();
-            setBottomBarMessage("Din biktning har postats");
+            if(response !== "too_short"){
+                $('#msgtext').val('');
+                $('#file').val(null);
+                $('#post-column').append(response);
+                updatePostsAjax();
+                setBottomBarMessage("Din biktning har postats");
+            } else {
+                setBottomBarMessage("Din biktning är för kort");
+            }
         }
     });
 });

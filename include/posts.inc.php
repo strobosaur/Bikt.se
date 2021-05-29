@@ -73,37 +73,6 @@ function countReplies($postID){
     }
 }
 
-// FUNCTION DELETE POST
-function deletePost($postID) 
-{
-    $result = postExists($postID);
-    
-    if ($result === false) {
-        return false;
-    } else {
-        // DELETE IMAGE
-        if ($result['postImage'] != null) {
-            unlink($result['postImage']);
-        }
-
-        // PREPARE DB QUERY
-        $db = new SQLite3("./db/labb1.db");
-        $sql = "DELETE FROM 'posts' WHERE postID = :postID";
-
-        $stmt = $db->prepare($sql);
-        $stmt->bindValue(':postID', $postID, SQLITE3_INTEGER);
-
-        // EXECUTE QUERY
-        if ($stmt->execute()) {
-            $db->close();
-            return true;
-        } else {
-            $db->close();
-            return false;
-        }
-    }
-}
-
 // FUNCTION UPLOAD IMAGE
 function uploadImg($fileName,$fileTmpName,$fileError) {
 
@@ -216,6 +185,49 @@ function makePost($row){
     </div>';
 
     return $post;
+}
+
+// FUNCTION DELETE POST
+function deletePost($postID) 
+{
+    $result = postExists($postID);
+    
+    if ($result === false) {
+        return false;
+    } else {
+        // DELETE IMAGE
+        if ($result['postImage'] != null) {
+            unlink($result['postImage']);
+        }
+
+        // DELETE REPLIES
+        if (countReplies($postID) > 0){
+            $db = new SQLite3("./db/labb1.db");
+            $sql = "DELETE FROM 'replies' WHERE postID = :postID";
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':postID', $postID, SQLITE3_INTEGER);
+            $stmt->execute();
+            $db->close();
+        }
+
+        // PREPARE DB QUERY
+        $db = new SQLite3("./db/labb1.db");
+
+        // DELETE POST QUERY
+        $sql = "DELETE FROM 'posts' WHERE postID = :postID";
+
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':postID', $postID, SQLITE3_INTEGER);
+
+        // EXECUTE QUERY
+        if ($stmt->execute()) {
+            $db->close();
+            return true;
+        } else {
+            $db->close();
+            return false;
+        }
+    }
 }
 
 // FUNCTION MAKE REPLY
