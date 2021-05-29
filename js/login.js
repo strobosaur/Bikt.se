@@ -7,7 +7,7 @@ $('#form-login').submit(function(e){
         var pwd = $("#login_password").val();
 
         $.ajax({
-            url: 'login_process.php',
+            url: 'login_process_ajax.php',
             type: 'POST',
             data: {
                 'login': 1,
@@ -17,9 +17,9 @@ $('#form-login').submit(function(e){
             success: function(response){
                 if (response == true) {
                     getPostformAjax();
-                    setBottomBarMessage("Inloggningen lyckades")
                     getMenuAjax();
                     updatePostsAjax();
+                    setBottomBarMessage("Du är nu inloggad")
                 } else {
                     setBottomBarMessage("Inloggningen misslyckades")
                 }

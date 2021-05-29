@@ -13,7 +13,6 @@ $('#form-search').submit(function(e) {
         },
         success: function(response){
             stopUpdatePosts();
-            //clearInterval(intervalUpdatePosts);
             $('#search_text').val('');
             $("#flex-container2").empty();
             $("#flex-container2").append(response);
