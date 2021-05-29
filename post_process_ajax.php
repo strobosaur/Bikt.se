@@ -17,6 +17,11 @@ if (!isset($_POST["post-submit"])) {
     $userPost = $_POST['msgtext'];
     $userProfileImg = fetchProfileImg($userID);
 
+    if (strlen($userPost) < 10) {
+        echo "too_short";
+        exit();
+    }
+
     $sql = "INSERT INTO posts (userID, userName, userEmail, userPost, postImage) 
             VALUES (:userID, :userName, :userEmail, :userPost, :postImage)";
 
