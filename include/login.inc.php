@@ -117,6 +117,18 @@ function registerUserToDB($userFname,$userLname,$userNname,$userEmail,$password1
         // EXECUTE STATEMENT
         if ($stmt1->execute()){
             $db->close();
+            
+            $userData = userExists($userEmailValue);
+            session_start();
+    
+            $_SESSION["userID"] = $userData['userID'];
+            $_SESSION["userFname"] = $userData['fname'];
+            $_SESSION["userLname"] = $userData['lname'];
+            $_SESSION["userNname"] = $userData['nname'];
+            $_SESSION["userEmail"] = $userData['email'];
+            $_SESSION["userProfileImg"] = $userData['profileImg'];
+            $_SESSION["loggedIn"] = true;
+    
             return true;
         } else {
             $db->close();
