@@ -311,4 +311,32 @@ function deleteReply($replyID)
     }
 }
 
+// FUNCTION GET LAST POST ID IN DB
+function getLastPostID(){
+    $db = new SQLite3("./db/labb1.db");
+    $sql = "SELECT MAX(postID) 
+            AS id
+            FROM posts";
+    $result = $db->query($sql);
+    if($row = $result->fetchArray()){
+        return $row['id'];
+    } else {
+        return false;
+    }
+}
+
+// FUNCTION GET LAST POST ID IN DB
+function getLastReplyID(){
+    $db = new SQLite3("./db/labb1.db");
+    $sql = "SELECT MAX(repID) 
+            AS id
+            FROM replies";
+    $result = $db->query($sql);
+    if($row = $result->fetchArray()){
+        return $row['id'];
+    } else {
+        return false;
+    }
+}
+
 ?>
