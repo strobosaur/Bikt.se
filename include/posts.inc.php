@@ -71,7 +71,6 @@ function countReplies($postID){
         $db->close();
         return false;
     }
-
 }
 
 // FUNCTION DELETE POST
@@ -157,7 +156,7 @@ function searchPosts($search){
     return $posts;
 }
 
-// FUNCTION MAKE POST FROM ROW
+// FUNCTION MAKE POST FROM ARRAY ROW
 function makePost($row){
     $userProfileImg = fetchProfileImg($row['userEmail']);
     $postDateTime = $row['postDateTime'];
@@ -212,18 +211,8 @@ function makePost($row){
                 }
 
             $post .= 
-            '</div>';
-
-                // DISPLAY REPLY BUTTON IF USER LOGGED IN
-                /*if (isset($_SESSION['userID']) && $replies != false) {                    
-                    $post .= 
-                    '<div class="post-footer2" id="post-footer2">
-                        <button class="link-view-reply-btn" type="submit" data-cid="'. $row['postID'] .'">Kommentarer(' . $replies . ')</button>
-                    </div>';
-                }*/
-
-            $post .= 
-        '</div>
+            '</div>
+        </div>
     </div>';
 
     return $post;

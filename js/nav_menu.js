@@ -39,5 +39,12 @@ $(document).ready(function(){
         getPostformAjax();
         updatePostsAjax();
         startUpdatePosts();
-    })    
+    })
+    
+    // NAVIGATION MENU PROFILE
+    $('#menu_profile').click(function(e) {
+        e.preventDefault();
+        getProfileAjax();
+        
+    })
 });

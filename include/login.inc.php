@@ -247,7 +247,7 @@ function uploadProfileImg($userID,$fileName,$fileTmpName,$fileError) {
     $result = userExists($userID);
     $fileExt = end(explode('.', strtolower($fileName)));
 
-    $allowedExtArr = array('jpg', 'jpeg', 'png');
+    $allowedExtArr = array('jpg', 'jpeg', 'png', 'gif');
 
     if (in_array($fileExt, $allowedExtArr)) {
         if ($fileError === 0) {
@@ -268,28 +268,38 @@ function changeProfileImg($userID, $filePath) {
 
     $result = userExists($userID);
 
+    // CHECK IF USER EXISTS
     if ($result != false) {
         $oldProfileImg = $result['profileImg'];
+        $userEmail = $result['email'];
 
+        // DELETE OLD PROFILE IMAGE
         if ($oldProfileImg != null) {
             unlink($oldProfileImg);
         }
 
+        // PREPARE QUERY
         $db = new SQLite3("./db/labb1.db");
 
-        // UPDATE USERS DB
         $sql1 = "UPDATE 'users'
                 SET profileImg = :profileImg
                 WHERE email = :email";
 
         $stmt1 = $db->prepare($sql1);
 
-        $stmt1->bindParam(':email', $userID, SQLITE3_TEXT);
-        $stmt1->bindParam(':profileImg', $filePath, SQLITE3_TEXT);
+        $stmt1->bindParam(':email', $userEmail, SQLITE3_TEXT);
 
+        // UPDATE OR DELETE IMAGE
+        if ($filePath !== null) {
+            $stmt1->bindParam(':profileImg', $filePath, SQLITE3_TEXT);
+        } else {
+            $stmt1->bindParam(':profileImg', $filePath, SQLITE3_NULL);
+        }
+
+        // EXECUTE STATEMENT
         if ($stmt1->execute()) {
             $db->close();
-            return true;
+            return $filePath;
         } else {
             $db->close();
             return false;

@@ -27,7 +27,7 @@ if(!isset($_POST['get_profile']) || !isset($_SESSION['userID'])) {
             </div>
 
             <div class="profile-view-top" id="profile-view-top">
-                <img src="' . $profileImg . '" width="96px" height="96px">
+                <img id="profile-img" src="' . $profileImg . '" width="96px" height="96px">
                 <h3 id="profile-h3">' . $uname . '</h3>    
             </div>                        
 
@@ -48,14 +48,20 @@ if(!isset($_POST['get_profile']) || !isset($_SESSION['userID'])) {
                 <h4>Ändra profilbild</h4>    
             </div>
             
-            <form class="form" id="form" action="register_img_process.php" method="POST" enctype="multipart/form-data">
+            <form class="form" id="form-submit-img" name="form-submit-img" action="register_img_process.php" method="POST" enctype="multipart/form-data">
 
                 <div class="form-control">
-                <input class="custom-file-upload" type="file" name="file">
+                <input class="custom-file-upload" type="file" name="file" id="file">
                 <small>Error message</small>
                 </div>
 
                 <button type="submit" name="submit-img" id="submit-img">Ladda upp</button>
+
+            </form>
+            
+            <form class="form" id="delete-profile-img" action="register_img_delete.php" method="POST" enctype="multipart/form-data">
+
+                <button type="submit" name="delete-img" id="delete-img">Radera profilbild</button>
 
             </form>
         </div>
